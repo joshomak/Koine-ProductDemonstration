@@ -6,56 +6,125 @@
   <title>Adaptive Trail Trike Technical Briefing</title>
   <style>
     :root {
+      --forest-950: #16261c;
       --forest-900: #1f3a2d;
-      --forest-700: #2f5a45;
-      --forest-500: #4a7c62;
-      --gray-900: #1f2933;
-      --gray-700: #4b5563;
-      --gray-400: #9ca3af;
-      --gray-200: #e5e7eb;
-      --gray-100: #f3f4f6;
+      --forest-700: #355843;
+      --forest-500: #5e8b6b;
+      --moss-300: #b7c8b8;
+      --earth-700: #6c5944;
+      --earth-500: #a6855e;
+      --sand-200: #e7dccb;
+      --sand-100: #f5efe5;
+      --gray-900: #1f241f;
+      --gray-700: #4e584f;
+      --gray-400: #97a29a;
+      --gray-200: #dde4db;
+      --gray-100: #f3f5ef;
       --white: #ffffff;
-      --accent: #2f6f5f;
-      --shadow: 0 8px 20px rgba(31, 58, 45, 0.08);
-      --radius: 12px;
+      --accent: #8c6e4d;
+      --shadow: 0 18px 40px rgba(25, 44, 32, 0.08);
+      --radius: 18px;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Aptos", "Segoe UI", Tahoma, sans-serif;
       color: var(--gray-900);
-      background: var(--white);
-      line-height: 1.5;
+      background:
+        radial-gradient(circle at top left, rgba(140, 110, 77, 0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(53, 88, 67, 0.1), transparent 26%),
+        linear-gradient(180deg, #fbfcf8 0%, #f5f7f1 100%);
+      line-height: 1.6;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background:
+        linear-gradient(115deg, rgba(255, 255, 255, 0.28) 0%, transparent 42%),
+        repeating-linear-gradient(135deg, rgba(94, 139, 107, 0.035) 0 2px, transparent 2px 22px);
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+      z-index: 0;
     }
 
     .container {
       width: min(1120px, 92vw);
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     section {
-      padding: 3.5rem 0;
-      border-bottom: 1px solid var(--gray-200);
+      padding: 4rem 0;
+      border-bottom: 1px solid rgba(53, 88, 67, 0.12);
+      position: relative;
+    }
+
+    section:not(.hero)::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: min(1120px, 92vw);
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent 0%, rgba(140, 110, 77, 0.35) 18%, rgba(53, 88, 67, 0.22) 52%, transparent 100%);
+    }
+
+    section:nth-of-type(odd):not(.hero) {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(244, 247, 240, 0.86) 100%);
     }
 
     h1, h2, h3 {
       margin: 0 0 0.9rem;
       line-height: 1.2;
       color: var(--forest-900);
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: -0.02em;
     }
 
-    h1 { font-size: clamp(2rem, 4vw, 3.3rem); }
-    h2 { font-size: clamp(1.55rem, 3vw, 2.1rem); }
-    h3 { font-size: 1.1rem; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.3rem); }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); }
+    h3 { font-size: 1.16rem; }
 
     p { margin: 0.3rem 0 1rem; color: var(--gray-700); }
 
     ul { margin: 0.2rem 0 0.2rem 1.2rem; padding: 0; }
 
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 42px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--earth-500), var(--forest-700));
+    }
+
+    .section-lead {
+      max-width: 42rem;
+      margin-bottom: 1.4rem;
+      font-size: 1rem;
+    }
+
     .hero {
-      background: linear-gradient(170deg, #eff6f1 0%, #ffffff 60%);
+      background:
+        radial-gradient(circle at 15% 18%, rgba(140, 110, 77, 0.15), transparent 26%),
+        radial-gradient(circle at 88% 12%, rgba(53, 88, 67, 0.16), transparent 24%),
+        linear-gradient(155deg, #eef3ea 0%, #fcfdf9 48%, #f0ebdf 100%);
       min-height: 92vh;
       display: flex;
       align-items: center;
@@ -63,66 +132,247 @@
       overflow: hidden;
     }
 
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(6px);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 320px;
+      height: 320px;
+      top: -120px;
+      right: -70px;
+      background: radial-gradient(circle, rgba(53, 88, 67, 0.18) 0%, rgba(53, 88, 67, 0) 72%);
+    }
+
+    .hero::after {
+      width: 280px;
+      height: 280px;
+      left: -80px;
+      bottom: -120px;
+      background: radial-gradient(circle, rgba(140, 110, 77, 0.14) 0%, rgba(140, 110, 77, 0) 72%);
+    }
+
     .hero-grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
-      gap: 1.3rem;
+      gap: 1.6rem;
       align-items: stretch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy {
+      padding: 1.4rem 0;
+      animation: rise-in 0.8s ease both;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(53, 88, 67, 0.18);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--forest-700);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--earth-500), var(--forest-500));
+      box-shadow: 0 0 0 4px rgba(94, 139, 107, 0.12);
+    }
+
+    .hero p strong {
+      color: var(--forest-950);
+    }
+
+    .hero-lead {
+      max-width: 40rem;
+      font-size: 1.08rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+
+    .hero-chip {
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(108, 89, 68, 0.18);
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--earth-700);
+      font-size: 0.92rem;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(31, 58, 45, 0.05);
+    }
+
+    .action-button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.8rem 1.1rem;
+      background: linear-gradient(135deg, var(--forest-900) 0%, var(--forest-700) 100%);
+      color: var(--white);
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 16px 30px rgba(31, 58, 45, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .floating-action {
+      position: fixed;
+      right: 1.1rem;
+      bottom: 1.1rem;
+      z-index: 20;
+    }
+
+    .action-button:hover,
+    .action-button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 36px rgba(31, 58, 45, 0.22);
+      filter: brightness(1.04);
+      outline: none;
     }
 
     .image-placeholder {
-      border: 2px dashed var(--forest-500);
-      border-radius: var(--radius);
-      background: repeating-linear-gradient(45deg, #f4faf6, #f4faf6 14px, #edf7f1 14px, #edf7f1 28px);
-      min-height: 260px;
+      border: 1px solid rgba(53, 88, 67, 0.14);
+      border-radius: 26px;
+      background: linear-gradient(145deg, rgba(244, 239, 229, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
+      min-height: 360px;
+      padding: 1.15rem;
+      box-shadow: 0 28px 55px rgba(31, 58, 45, 0.1);
+      position: relative;
+      animation: drift-in 0.95s ease both;
+    }
+
+    .image-placeholder::before {
+      content: "Render Stage";
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(31, 58, 45, 0.88);
+      color: var(--white);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .image-placeholder::after {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(248, 250, 246, 0.95) 0%, rgba(255, 255, 255, 1) 100%);
+      border: 1px dashed rgba(94, 139, 107, 0.42);
+    }
+
+    .render-placeholder-copy {
+      position: absolute;
+      inset: 1rem;
       display: grid;
       place-items: center;
-      color: var(--forest-700);
-      font-weight: 600;
       text-align: center;
-      padding: 1rem;
+      color: var(--forest-700);
+      font-weight: 700;
+      z-index: 1;
+      padding: 2rem;
+    }
+
+    .render-placeholder-copy span {
+      display: block;
+      margin-top: 0.5rem;
+      color: var(--gray-700);
+      font-size: 0.95rem;
+      font-weight: 600;
     }
 
     .metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0.9rem;
-      margin-top: 1rem;
+      gap: 1rem;
+      margin-top: 1.2rem;
     }
 
     .interactive-note {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.55rem;
       margin: 0.35rem 0 1rem;
-      padding: 0.45rem 0.75rem;
-      border: 1px solid #cfe1d8;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid rgba(53, 88, 67, 0.14);
       border-radius: 999px;
-      background: #f4faf7;
+      background: rgba(255, 255, 255, 0.84);
       color: var(--forest-700);
       font-size: 0.9rem;
       font-weight: 600;
+      box-shadow: 0 14px 28px rgba(31, 58, 45, 0.06);
     }
 
     .metric-card, .tile, .feature-card, .callout, .cta-panel {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 246, 0.98) 100%);
+      border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before, .tile::before, .feature-card::before, .cta-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--forest-700) 0%, var(--earth-500) 70%, transparent 100%);
     }
 
     .metric-card {
-      padding: 1rem;
+      padding: 1.2rem;
+    }
+
+    .metric-card div:last-child {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      color: var(--earth-700);
+      font-weight: 700;
     }
 
     .metric-card:hover, .feature-card:hover, .tile:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 24px rgba(31, 58, 45, 0.12);
+      box-shadow: 0 20px 36px rgba(31, 58, 45, 0.14);
+      border-color: rgba(108, 89, 68, 0.2);
     }
 
     .metric-card .value {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
       color: var(--forest-700);
       margin-bottom: 0.3rem;
@@ -156,19 +406,32 @@
 
     .feature-grid, .operations-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.85rem;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
     }
 
     .feature-card {
-      padding: 1rem;
+      padding: 1.2rem;
       cursor: pointer;
     }
 
+    .feature-card::after,
+    .tile::after {
+      content: "";
+      position: absolute;
+      right: -18px;
+      bottom: -18px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(166, 133, 94, 0.12) 0%, rgba(166, 133, 94, 0) 72%);
+      pointer-events: none;
+    }
+
     .feature-panel, .tile-panel {
-      margin-top: 0.6rem;
-      border-top: 1px solid var(--gray-200);
-      padding-top: 0.6rem;
+      margin-top: 0.8rem;
+      border-top: 1px solid rgba(53, 88, 67, 0.12);
+      padding-top: 0.8rem;
       display: none;
     }
 
@@ -179,19 +442,20 @@
 
     .diagram-wrap {
       margin-top: 1rem;
-      background: var(--gray-100);
-      border: 1px solid var(--gray-200);
+      background: linear-gradient(180deg, rgba(250, 251, 248, 0.98) 0%, rgba(242, 245, 238, 0.98) 100%);
+      border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
-      padding: 1rem;
+      padding: 1.2rem;
       position: relative;
+      box-shadow: var(--shadow);
     }
 
     .diagram {
       position: relative;
-      min-height: 260px;
-      border: 2px dashed var(--gray-400);
+      min-height: 300px;
+      border: 2px dashed rgba(94, 139, 107, 0.42);
       border-radius: var(--radius);
-      background: #fcfffd;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 246, 1) 100%);
       display: grid;
       place-items: center;
       color: var(--gray-700);
@@ -200,11 +464,26 @@
       padding: 1rem;
     }
 
+    .diagram::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(94, 139, 107, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(94, 139, 107, 0.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
     .callout {
       position: absolute;
-      padding: 0.5rem 0.6rem;
+      padding: 0.6rem 0.8rem;
       font-size: 0.86rem;
       cursor: default;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(53, 88, 67, 0.14);
+      box-shadow: 0 16px 28px rgba(31, 58, 45, 0.08);
     }
 
     .callout::after {
@@ -213,7 +492,7 @@
       left: 0;
       top: calc(100% + 8px);
       min-width: 200px;
-      background: var(--gray-900);
+      background: var(--forest-950);
       color: var(--white);
       border-radius: 8px;
       padding: 0.55rem;
@@ -241,22 +520,24 @@
     }
 
     .config-display {
-      border: 1px solid var(--gray-200);
+      border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
-      background: var(--gray-100);
+      background: linear-gradient(180deg, rgba(246, 248, 242, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
       min-height: 220px;
-      padding: 1rem;
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
     }
 
     .config-diagram {
       min-height: 95px;
-      border: 2px dashed var(--gray-400);
-      border-radius: 10px;
+      border: 2px dashed rgba(94, 139, 107, 0.38);
+      border-radius: 14px;
       display: grid;
       place-items: center;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.9rem;
       color: var(--gray-700);
       font-weight: 600;
+      background: rgba(255, 255, 255, 0.76);
     }
 
     .limits {
@@ -267,8 +548,8 @@
     }
 
     .pill {
-      background: #eaf4ef;
-      border: 1px solid #d3e6dd;
+      background: linear-gradient(180deg, #eef5ef 0%, #e6efe8 100%);
+      border: 1px solid rgba(53, 88, 67, 0.14);
       border-radius: 999px;
       padding: 0.45rem 0.8rem;
       font-weight: 600;
@@ -277,36 +558,72 @@
     }
 
     .tile {
-      padding: 1rem;
+      padding: 1.15rem;
       cursor: pointer;
     }
 
     details {
-      border: 1px solid var(--gray-200);
+      border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
-      padding: 0.75rem 0.9rem;
-      background: var(--white);
-      margin-bottom: 0.7rem;
+      padding: 0.95rem 1rem;
+      background: rgba(255, 255, 255, 0.94);
+      margin-bottom: 0.8rem;
+      box-shadow: var(--shadow);
+    }
+
+    details[open] {
+      border-color: rgba(108, 89, 68, 0.22);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 243, 237, 0.9) 100%);
     }
 
     summary {
       font-weight: 700;
       color: var(--forest-900);
       cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      display: inline-grid;
+      place-items: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: rgba(53, 88, 67, 0.08);
+      color: var(--forest-700);
+      font-size: 1rem;
+      flex: 0 0 auto;
+    }
+
+    details[open] summary::after {
+      content: "-";
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.95rem;
-      background: var(--white);
+      background: rgba(255, 255, 255, 0.97);
     }
 
     th, td {
-      border: 1px solid var(--gray-200);
-      padding: 0.65rem;
+      border: 1px solid rgba(53, 88, 67, 0.1);
+      padding: 0.8rem 0.75rem;
       text-align: left;
       vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: rgba(243, 247, 241, 0.72);
     }
 
     .spec-table td:first-child,
@@ -314,27 +631,32 @@
 
     .compare-wrap {
       overflow-x: auto;
-      border: 1px solid var(--gray-200);
+      border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .compare-wrap::before {
+      content: "Market Positioning Snapshot";
+      display: block;
+      padding: 0.8rem 1rem 0.55rem;
+      color: var(--earth-700);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .compare-table thead th {
       position: sticky;
       top: 0;
-      background: #edf6f1;
+      background: linear-gradient(180deg, #edf4ec 0%, #e7ece2 100%);
       z-index: 1;
+      color: var(--forest-950);
     }
 
-    .compare-table tbody tr:hover { background: #f5faf7; }
-
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      margin: 0.7rem 0;
-      color: var(--gray-700);
-      font-weight: 600;
-    }
+    .compare-table tbody tr:hover { background: rgba(238, 245, 239, 0.9); }
 
     .timeline {
       display: grid;
@@ -344,14 +666,66 @@
 
     .timeline-item {
       border-left: 4px solid var(--forest-500);
-      background: #f8fcf9;
-      padding: 0.7rem 0.85rem;
-      border-radius: 0 8px 8px 0;
+      background: linear-gradient(90deg, rgba(241, 247, 241, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
+      padding: 0.9rem 1rem;
+      border-radius: 0 14px 14px 0;
+      box-shadow: var(--shadow);
     }
 
     .cta-panel {
-      padding: 1rem;
-      background: linear-gradient(170deg, #f4faf7 0%, #fff 85%);
+      padding: 1.3rem;
+      background: linear-gradient(140deg, rgba(243, 248, 242, 0.98) 0%, rgba(255, 255, 255, 0.98) 52%, rgba(245, 239, 229, 0.98) 100%);
+    }
+
+    .feature-card,
+    .tile,
+    details,
+    .timeline-item,
+    .contact-card {
+      animation: rise-in 0.7s ease both;
+    }
+
+    .feature-card:nth-child(2),
+    .tile:nth-child(2),
+    details:nth-of-type(2),
+    .timeline-item:nth-child(2),
+    .contact-card:nth-child(2) { animation-delay: 0.05s; }
+
+    .feature-card:nth-child(3),
+    .tile:nth-child(3),
+    details:nth-of-type(3),
+    .timeline-item:nth-child(3),
+    .contact-card:nth-child(3) { animation-delay: 0.1s; }
+
+    .feature-card:nth-child(4),
+    .tile:nth-child(4),
+    details:nth-of-type(4),
+    .timeline-item:nth-child(4),
+    .contact-card:nth-child(4) { animation-delay: 0.15s; }
+
+    .feature-card:nth-child(5),
+    .tile:nth-child(5) { animation-delay: 0.2s; }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes drift-in {
+      from {
+        opacity: 0;
+        transform: translateX(24px) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+      }
     }
 
     .contact-grid {
@@ -362,20 +736,43 @@
     }
 
     .contact-card {
-      border: 1px solid var(--gray-200);
+      border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
-      padding: 0.8rem;
-      background: #fafafa;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow);
+    }
+
+    .print-config-list {
+      display: none;
+    }
+
+    .print-config-card {
+      border: 1px solid rgba(53, 88, 67, 0.12);
+      border-radius: var(--radius);
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow);
+      margin-top: 0.8rem;
     }
 
     @media (max-width: 900px) {
       .hero-grid, .slider-wrap { grid-template-columns: 1fr; }
       .metrics { grid-template-columns: 1fr; }
       .scroll-cue { display: none; }
+      .image-placeholder { min-height: 300px; }
+      .floating-action {
+        right: 0.8rem;
+        bottom: 0.8rem;
+      }
+      .action-button {
+        width: min(88vw, 320px);
+        justify-content: center;
+      }
     }
 
     @page {
-      size: auto;
+      size: letter portrait;
       margin: 0.35in;
     }
 
@@ -391,6 +788,10 @@
         background: #fff;
       }
 
+      body::before {
+        display: none;
+      }
+
       .container {
         width: 100%;
         max-width: none;
@@ -398,9 +799,11 @@
       }
 
       section {
-        padding: 0.22in 0;
+        padding: 0.14in 0;
         border-bottom: 1px solid #d9d9d9;
-        page-break-inside: avoid;
+        page-break-inside: auto;
+        break-inside: auto;
+        background: #fff;
       }
 
       h1 { font-size: 31pt; }
@@ -409,10 +812,28 @@
       p, li, summary, label, .pill { font-size: 14.5pt; }
       .value { font-size: 18.5pt; }
 
+      h1, h2, h3 {
+        margin-bottom: 0.12in;
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      p, ul, table, details, .timeline, .compare-wrap, .diagram-wrap, .config-display {
+        margin-top: 0;
+        margin-bottom: 0.1in;
+      }
+
       .hero {
         min-height: auto;
         display: block;
-        padding-top: 0.1in;
+        padding-top: 0.04in;
+        background: #fff;
+      }
+
+      .hero::before,
+      .hero::after,
+      section:not(.hero)::before {
+        display: none;
       }
 
       .hero-grid,
@@ -424,8 +845,10 @@
       .feature-grid,
       .operations-grid,
       .contact-grid,
-      .limits {
-        gap: 0.18in;
+      .limits,
+      .slider-wrap {
+        grid-template-columns: 1fr;
+        gap: 0.14in;
       }
 
       .metric-card,
@@ -434,16 +857,37 @@
       .callout,
       .cta-panel,
       .contact-card,
-      details {
+      details,
+      .print-config-card {
         padding: 0.12in;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .timeline-item,
+      .compare-wrap,
+      .diagram-wrap,
+      .config-display,
+      .print-config-list,
+      table,
+      tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
 
       .scroll-cue { display: none !important; }
       .feature-panel, .tile-panel { display: block !important; }
-      .feature-card, .tile, details, .metric-card, .callout, .cta-panel { box-shadow: none; }
+      .feature-card, .tile, details, .metric-card, .callout, .cta-panel, .compare-wrap, .contact-card, .config-display, .diagram-wrap, .timeline-item { box-shadow: none; }
+      .feature-card, .tile, details, .timeline-item, .contact-card, .hero-copy, .image-placeholder {
+        animation: none;
+      }
       .compare-wrap {
         overflow: visible;
         border: 0;
+        background: #fff;
+      }
+      .compare-wrap::before {
+        padding: 0 0 0.08in;
       }
       table {
         table-layout: fixed;
@@ -470,18 +914,36 @@
         font-size: 9.5pt;
       }
 
+      .config-display {
+        display: none;
+      }
+
+      .print-config-list {
+        display: block;
+      }
+
       .hide-on-print { display: none !important; }
+      .floating-action { display: none !important; }
       input[type="range"] { display: none; }
     }
   </style>
 </head>
 <body>
+  <div class="floating-action hide-on-print">
+    <button id="expandAllButton" class="action-button" type="button" aria-pressed="false">Open All Details</button>
+  </div>
   <section class="hero">
     <div class="container">
       <div class="hero-grid">
-        <div>
+        <div class="hero-copy">
+          <div class="hero-kicker">Interactive Technical Briefing</div>
           <h1>[Bike Name Placeholder]</h1>
-          <p><strong>An adaptive electric trail trike designed for riders traditionally excluded from adaptive mountain biking.</strong></p>
+          <p class="hero-lead"><strong>An adaptive electric trail trike designed for riders traditionally excluded from adaptive mountain biking.</strong></p>
+          <div class="hero-meta">
+            <div class="hero-chip">Forest-ready durability</div>
+            <div class="hero-chip">Inclusive rider fit</div>
+            <div class="hero-chip">Fleet-focused operations</div>
+          </div>
           <p class="interactive-note hide-on-print">Open this on the web and click around. Several sections expand for more detail.</p>
           <div class="metrics">
             <article class="metric-card">
@@ -498,7 +960,12 @@
             </article>
           </div>
         </div>
-        <div class="image-placeholder">[Prototype Image Placeholder]</div>
+        <div class="image-placeholder">
+          <div class="render-placeholder-copy">
+            [Prototype Image Placeholder]
+            <span>White-background render area with elevated frame treatment</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="scroll-cue"><span>Scroll for operational details</span><span class="scroll-dot" aria-hidden="true"></span></div>
@@ -506,7 +973,8 @@
 
   <section>
     <div class="container">
-      <h2>Quick Overview</h2>
+      <h2 class="section-title">Quick Overview</h2>
+      <p class="section-lead">A high-level map of the product priorities. Each card expands, so the page behaves more like an active field brief than a static one-pager.</p>
       <div class="feature-grid">
         <article class="feature-card" tabindex="0">
           <h3>Rider Adaptability</h3>
@@ -534,8 +1002,8 @@
 
   <section>
     <div class="container">
-      <h2>Design Overview</h2>
-      <p>Hover callouts to view component roles.</p>
+      <h2 class="section-title">Design Overview</h2>
+      <p class="section-lead">Hover the system labels to inspect component intent and how the architecture balances trail feel with low-maintenance fleet use.</p>
       <div class="diagram-wrap">
         <div class="diagram">[Trike Diagram Placeholder]</div>
         <div class="callout c1" data-tip="Front wheel pair provides stability and predictable steering.">Front Wheel Pair</div>
@@ -548,7 +1016,8 @@
 
   <section>
     <div class="container">
-      <h2>Rider Adaptability</h2>
+      <h2 class="section-title">Rider Adaptability</h2>
+      <p class="section-lead">Use the configuration slider to move between supported rider positions and review the fixed adjustment points below.</p>
       <div class="slider-wrap">
         <div>
           <label for="configSlider"><strong>Rider configuration</strong></label>
@@ -575,12 +1044,42 @@
           <ul id="configBullets"></ul>
         </div>
       </div>
+      <div class="print-config-list">
+        <div class="print-config-card">
+          <div class="pill">Position 1</div>
+          <h3 style="margin-top:0.8rem;">90-degree seated with foot pegs</h3>
+          <ul>
+            <li>Upright seated posture for stable trunk support.</li>
+            <li>Foot pegs position lower legs in controlled neutral placement.</li>
+            <li>Useful for riders needing frequent stop/start supervision.</li>
+          </ul>
+        </div>
+        <div class="print-config-card">
+          <div class="pill">Position 2</div>
+          <h3 style="margin-top:0.8rem;">45-degree forward position with foot pads</h3>
+          <ul>
+            <li>Forward-leaning setup can improve rider engagement with terrain.</li>
+            <li>Foot pads support broader lower-limb contact area.</li>
+            <li>Supports riders transitioning from upright to dynamic posture.</li>
+          </ul>
+        </div>
+        <div class="print-config-card">
+          <div class="pill">Position 3</div>
+          <h3 style="margin-top:0.8rem;">Long-sitting configuration with adjustable leg supports</h3>
+          <ul>
+            <li>Leg supports provide extended lower-limb guidance.</li>
+            <li>Accommodates long-sitting users requiring different hip and knee angles.</li>
+            <li>Helps maintain consistent posture over longer outings.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="container">
-      <h2>Program Operations</h2>
+      <h2 class="section-title">Program Operations</h2>
+      <p class="section-lead">Operational constraints are presented as expandable tiles to keep the page scan-friendly while still exposing volunteer and fleet details on demand.</p>
       <div class="operations-grid">
         <article class="tile"><h3>Bike Weight</h3><p><strong>&lt; 70 lbs</strong></p><div class="tile-panel">Allows one volunteer to reposition bike for staging and short loading tasks.</div></article>
         <article class="tile"><h3>Unload Time</h3><p><strong>&lt; 5 minutes</strong></p><div class="tile-panel">Designed for quick unloading from common racks and trailers with minimal handling complexity.</div></article>
@@ -593,7 +1092,7 @@
 
   <section>
     <div class="container">
-      <h2>Maintenance and Durability</h2>
+      <h2 class="section-title">Maintenance and Durability</h2>
       <details open>
         <summary>Frame Materials</summary>
         <ul><li>4130 chromoly steel</li><li>Aluminum components</li></ul>
@@ -615,7 +1114,7 @@
 
   <section>
     <div class="container">
-      <h2>Performance Specifications</h2>
+      <h2 class="section-title">Performance Specifications</h2>
       <table class="spec-table">
         <tbody>
           <tr><td>Configuration</td><td>Tadpole trike</td></tr>
@@ -632,7 +1131,7 @@
 
   <section>
     <div class="container">
-      <h2>Comparison Table</h2>
+      <h2 class="section-title">Comparison Table</h2>
       <div class="compare-wrap">
         <table class="compare-table">
           <thead>
@@ -655,7 +1154,7 @@
 
   <section>
     <div class="container">
-      <h2>Prototype Status</h2>
+      <h2 class="section-title">Prototype Status</h2>
       <div class="timeline">
         <div class="timeline-item"><strong>Prototype Generation:</strong> Gen-1</div>
         <div class="timeline-item"><strong>Field Testing Completed:</strong> California, Utah, Washington, British Columbia</div>
@@ -667,7 +1166,7 @@
 
   <section>
     <div class="container">
-      <h2>Pilot Program Opportunity</h2>
+      <h2 class="section-title">Pilot Program Opportunity</h2>
       <div class="cta-panel">
         <p>We are seeking adaptive sports programs interested in piloting early units.</p>
         <p>Pilot programs will help validate:</p>
@@ -683,7 +1182,7 @@
 
   <section>
     <div class="container">
-      <h2>Contact</h2>
+      <h2 class="section-title">Contact</h2>
       <div class="contact-grid">
         <div class="contact-card"><strong>Name</strong><p>[Contact Name Placeholder]</p></div>
         <div class="contact-card"><strong>Organization</strong><p>[Organization Placeholder]</p></div>
@@ -728,6 +1227,9 @@
     const title = document.getElementById('configTitle');
     const bullets = document.getElementById('configBullets');
     const diagram = document.getElementById('configDiagram');
+    const expandAllButton = document.getElementById('expandAllButton');
+    const cards = Array.from(document.querySelectorAll('.feature-card, .tile'));
+    const detailBlocks = Array.from(document.querySelectorAll('details'));
 
     function renderConfig(position) {
       const cfg = configs[position];
@@ -739,6 +1241,43 @@
 
     slider.addEventListener('input', (e) => renderConfig(e.target.value));
     renderConfig(1);
+
+    function syncExpandAllButton() {
+      const allCardsOpen = cards.every((card) => card.classList.contains('active'));
+      const allDetailsOpen = detailBlocks.every((block) => block.open);
+      const allOpen = allCardsOpen && allDetailsOpen;
+      expandAllButton.textContent = allOpen ? 'Collapse All Details' : 'Open All Details';
+      expandAllButton.setAttribute('aria-pressed', String(allOpen));
+    }
+
+    expandAllButton.addEventListener('click', () => {
+      const allOpen = cards.every((card) => card.classList.contains('active')) && detailBlocks.every((block) => block.open);
+
+      cards.forEach((card) => {
+        card.classList.toggle('active', !allOpen);
+      });
+
+      detailBlocks.forEach((block) => {
+        block.open = !allOpen;
+      });
+
+      syncExpandAllButton();
+    });
+
+    cards.forEach((card) => {
+      card.addEventListener('click', syncExpandAllButton);
+      card.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          requestAnimationFrame(syncExpandAllButton);
+        }
+      });
+    });
+
+    detailBlocks.forEach((block) => {
+      block.addEventListener('toggle', syncExpandAllButton);
+    });
+
+    syncExpandAllButton();
 
   </script>
 </body>
