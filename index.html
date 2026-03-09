@@ -90,6 +90,20 @@
       margin-top: 1rem;
     }
 
+    .interactive-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0.35rem 0 1rem;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid #cfe1d8;
+      border-radius: 999px;
+      background: #f4faf7;
+      color: var(--forest-700);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
     .metric-card, .tile, .feature-card, .callout, .cta-panel {
       background: var(--white);
       border: 1px solid var(--gray-200);
@@ -360,15 +374,104 @@
       .scroll-cue { display: none; }
     }
 
+    @page {
+      size: auto;
+      margin: 0.35in;
+    }
+
     @media print {
-      body { color: #000; }
+      html, body {
+        width: 100%;
+      }
+
+      body {
+        color: #000;
+        font-size: 16pt;
+        line-height: 1.6;
+        background: #fff;
+      }
+
+      .container {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+      }
+
+      section {
+        padding: 0.22in 0;
+        border-bottom: 1px solid #d9d9d9;
+        page-break-inside: avoid;
+      }
+
+      h1 { font-size: 31pt; }
+      h2 { font-size: 22pt; }
+      h3 { font-size: 15.5pt; }
+      p, li, summary, label, .pill { font-size: 14.5pt; }
+      .value { font-size: 18.5pt; }
+
+      .hero {
+        min-height: auto;
+        display: block;
+        padding-top: 0.1in;
+      }
+
+      .hero-grid,
+      .slider-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics,
+      .feature-grid,
+      .operations-grid,
+      .contact-grid,
+      .limits {
+        gap: 0.18in;
+      }
+
+      .metric-card,
+      .tile,
+      .feature-card,
+      .callout,
+      .cta-panel,
+      .contact-card,
+      details {
+        padding: 0.12in;
+      }
+
       .scroll-cue { display: none !important; }
       .feature-panel, .tile-panel { display: block !important; }
       .feature-card, .tile, details, .metric-card, .callout, .cta-panel { box-shadow: none; }
-      section { page-break-inside: avoid; }
-      .compare-wrap { overflow: visible; }
-      .compare-table thead th { position: static; }
+      .compare-wrap {
+        overflow: visible;
+        border: 0;
+      }
+      table {
+        table-layout: fixed;
+      }
+
+      th,
+      td {
+        font-size: 10pt;
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        hyphens: auto;
+        padding: 0.08in 0.06in;
+      }
+
+      .spec-table td:first-child,
+      .compare-table td:first-child,
+      .compare-table th:first-child {
+        width: 14%;
+      }
+
+      .compare-table thead th {
+        position: static;
+        font-size: 9.5pt;
+      }
+
       .hide-on-print { display: none !important; }
+      input[type="range"] { display: none; }
     }
   </style>
 </head>
@@ -379,6 +482,7 @@
         <div>
           <h1>[Bike Name Placeholder]</h1>
           <p><strong>An adaptive electric trail trike designed for riders traditionally excluded from adaptive mountain biking.</strong></p>
+          <p class="interactive-note hide-on-print">Open this on the web and click around. Several sections expand for more detail.</p>
           <div class="metrics">
             <article class="metric-card">
               <div class="value">&lt; 70 lbs</div>
@@ -529,7 +633,6 @@
   <section>
     <div class="container">
       <h2>Comparison Table</h2>
-      <label class="toggle-row hide-on-print"><input id="keyDiffToggle" type="checkbox" /> Show Only Key Differences</label>
       <div class="compare-wrap">
         <table class="compare-table">
           <thead>
@@ -637,15 +740,6 @@
     slider.addEventListener('input', (e) => renderConfig(e.target.value));
     renderConfig(1);
 
-    const toggle = document.getElementById('keyDiffToggle');
-    const rows = Array.from(document.querySelectorAll('.compare-table tbody tr'));
-    toggle.addEventListener('change', () => {
-      const hideSimilar = toggle.checked;
-      rows.forEach((row) => {
-        const isSimilar = row.dataset.similar === 'true';
-        row.style.display = hideSimilar && isSimilar ? 'none' : '';
-      });
-    });
   </script>
 </body>
 </html>
