@@ -57,6 +57,27 @@
       z-index: 0;
     }
 
+    body.screenshot-mode .floating-action {
+      display: none !important;
+    }
+
+    body.screenshot-mode .feature-panel,
+    body.screenshot-mode .tile-panel {
+      display: block;
+    }
+
+    body.screenshot-mode .config-controls,
+    body.screenshot-mode .config-display {
+      display: none;
+    }
+
+    body.screenshot-mode .print-config-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
     .container {
       width: min(1120px, 92vw);
       margin: 0 auto;
@@ -160,9 +181,9 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 1.6rem;
-      align-items: stretch;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      align-items: start;
       position: relative;
       z-index: 1;
     }
@@ -170,6 +191,7 @@
     .hero-copy {
       padding: 1.4rem 0;
       animation: rise-in 0.8s ease both;
+      max-width: 46rem;
     }
 
     .hero-kicker {
@@ -256,19 +278,18 @@
       outline: none;
     }
 
-    .image-placeholder {
+    .image-frame {
       border: 1px solid rgba(53, 88, 67, 0.14);
       border-radius: 26px;
       background: linear-gradient(145deg, rgba(244, 239, 229, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
-      min-height: 360px;
       padding: 1.15rem;
       box-shadow: 0 28px 55px rgba(31, 58, 45, 0.1);
       position: relative;
       animation: drift-in 0.95s ease both;
     }
 
-    .image-placeholder::before {
-      content: "Render Stage";
+    .image-frame::before {
+      content: "Prototype Render";
       position: absolute;
       top: 1rem;
       left: 1rem;
@@ -283,7 +304,7 @@
       z-index: 1;
     }
 
-    .image-placeholder::after {
+    .image-frame::after {
       content: "";
       position: absolute;
       inset: 1rem;
@@ -292,24 +313,20 @@
       border: 1px dashed rgba(94, 139, 107, 0.42);
     }
 
-    .render-placeholder-copy {
-      position: absolute;
-      inset: 1rem;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: var(--forest-700);
-      font-weight: 700;
+    .media-surface {
+      position: relative;
       z-index: 1;
-      padding: 2rem;
+      width: 100%;
+      aspect-ratio: 702 / 496;
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(248, 250, 246, 0.95) 0%, rgba(255, 255, 255, 1) 100%);
     }
 
-    .render-placeholder-copy span {
+    .media-image {
       display: block;
-      margin-top: 0.5rem;
-      color: var(--gray-700);
-      font-size: 0.95rem;
-      font-weight: 600;
+      width: 100%;
+      height: auto;
     }
 
     .metrics {
@@ -452,16 +469,11 @@
 
     .diagram {
       position: relative;
-      min-height: 300px;
       border: 2px dashed rgba(94, 139, 107, 0.42);
       border-radius: var(--radius);
       background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 246, 1) 100%);
-      display: grid;
-      place-items: center;
-      color: var(--gray-700);
-      font-weight: 600;
-      text-align: center;
       padding: 1rem;
+      overflow: hidden;
     }
 
     .diagram::before {
@@ -513,13 +525,12 @@
 
     .slider-wrap {
       margin-top: 1rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      align-items: start;
+      display: block;
+      max-width: 38rem;
     }
 
     .config-display {
+      margin-top: 1rem;
       border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
       background: linear-gradient(180deg, rgba(246, 248, 242, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
@@ -529,14 +540,16 @@
     }
 
     .config-diagram {
-      min-height: 95px;
       border: 2px dashed rgba(94, 139, 107, 0.38);
       border-radius: 14px;
-      display: grid;
-      place-items: center;
       margin-bottom: 0.9rem;
-      color: var(--gray-700);
-      font-weight: 600;
+      background: rgba(255, 255, 255, 0.76);
+      overflow: hidden;
+    }
+
+    .diagram .media-surface,
+    .config-diagram .media-surface {
+      border-radius: 10px;
       background: rgba(255, 255, 255, 0.76);
     }
 
@@ -756,11 +769,18 @@
       margin-top: 0.8rem;
     }
 
+    .print-config-card h3 {
+      margin-top: 0.8rem;
+    }
+
+    .print-config-card .media-surface {
+      margin-top: 0.85rem;
+    }
+
     @media (max-width: 900px) {
-      .hero-grid, .slider-wrap { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; }
       .metrics { grid-template-columns: 1fr; }
       .scroll-cue { display: none; }
-      .image-placeholder { min-height: 300px; }
       .floating-action {
         right: 0.8rem;
         bottom: 0.8rem;
@@ -768,6 +788,9 @@
       .action-button {
         width: min(88vw, 320px);
         justify-content: center;
+      }
+      body.screenshot-mode .print-config-list {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -836,8 +859,7 @@
         display: none;
       }
 
-      .hero-grid,
-      .slider-wrap {
+      .hero-grid {
         grid-template-columns: 1fr;
       }
 
@@ -845,8 +867,7 @@
       .feature-grid,
       .operations-grid,
       .contact-grid,
-      .limits,
-      .slider-wrap {
+      .limits {
         grid-template-columns: 1fr;
         gap: 0.14in;
       }
@@ -878,7 +899,7 @@
       .scroll-cue { display: none !important; }
       .feature-panel, .tile-panel { display: block !important; }
       .feature-card, .tile, details, .metric-card, .callout, .cta-panel, .compare-wrap, .contact-card, .config-display, .diagram-wrap, .timeline-item { box-shadow: none; }
-      .feature-card, .tile, details, .timeline-item, .contact-card, .hero-copy, .image-placeholder {
+      .feature-card, .tile, details, .timeline-item, .contact-card, .hero-copy, .image-frame {
         animation: none;
       }
       .compare-wrap {
@@ -937,7 +958,12 @@
       <div class="hero-grid">
         <div class="hero-copy">
           <div class="hero-kicker">Interactive Technical Briefing</div>
-          <h1>[Bike Name Placeholder]</h1>
+          <div class="image-frame" style="margin-bottom:1.1rem;">
+            <div class="media-surface">
+              <img class="media-image" src="assets/prototype image.png" alt="Prototype render of the adaptive electric trail trike" width="702" height="496" />
+            </div>
+          </div>
+          <h1>KOINE RAINIER</h1>
           <p class="hero-lead"><strong>An adaptive electric trail trike designed for riders traditionally excluded from adaptive mountain biking.</strong></p>
           <div class="hero-meta">
             <div class="hero-chip">Forest-ready durability</div>
@@ -951,19 +977,13 @@
               <div>Weight</div>
             </article>
             <article class="metric-card">
-              <div class="value">40–80 miles</div>
+              <div class="value">40-80 miles</div>
               <div>Range</div>
             </article>
             <article class="metric-card">
-              <div class="value">$5k–$7.5k</div>
+              <div class="value">$5k-$7.5k</div>
               <div>Target Price</div>
             </article>
-          </div>
-        </div>
-        <div class="image-placeholder">
-          <div class="render-placeholder-copy">
-            [Prototype Image Placeholder]
-            <span>White-background render area with elevated frame treatment</span>
           </div>
         </div>
       </div>
@@ -1005,7 +1025,11 @@
       <h2 class="section-title">Design Overview</h2>
       <p class="section-lead">Hover the system labels to inspect component intent and how the architecture balances trail feel with low-maintenance fleet use.</p>
       <div class="diagram-wrap">
-        <div class="diagram">[Trike Diagram Placeholder]</div>
+        <div class="diagram">
+          <div class="media-surface">
+            <img class="media-image" src="assets/trike_diagram_profile.png" alt="Profile diagram of the adaptive trail trike" width="702" height="496" />
+          </div>
+        </div>
         <div class="callout c1" data-tip="Front wheel pair provides stability and predictable steering.">Front Wheel Pair</div>
         <div class="callout c2" data-tip="Fat rear tire provides shock absorption in absence of suspension.">Fat Rear Tire</div>
         <div class="callout c3" data-tip="2000W rear hub motor provides electric propulsion.">Rear Hub Motor</div>
@@ -1018,8 +1042,17 @@
     <div class="container">
       <h2 class="section-title">Rider Adaptability</h2>
       <p class="section-lead">Use the configuration slider to move between supported rider positions and review the fixed adjustment points below.</p>
+      <div class="config-display">
+        <div class="config-diagram">
+          <div class="media-surface">
+            <img id="configImage" class="media-image" src="assets/position 1.png" alt="Position 1 rider seating configuration" width="702" height="496" />
+          </div>
+        </div>
+        <h3 id="configTitle">90-degree seated with foot pegs</h3>
+        <ul id="configBullets"></ul>
+      </div>
       <div class="slider-wrap">
-        <div>
+        <div class="config-controls">
           <label for="configSlider"><strong>Rider configuration</strong></label>
           <input id="configSlider" type="range" min="1" max="3" step="1" value="1" style="width:100%; margin-top:0.7rem;" />
           <div id="positionLabel" class="pill" style="margin-top:0.8rem;">Position 1</div>
@@ -1035,19 +1068,17 @@
           <div class="limits">
             <div class="pill">Max rider height: 6'2"</div>
             <div class="pill">Max rider weight: 220 lbs</div>
-            <div class="pill">Volunteer adjustment: 20–30 min</div>
+            <div class="pill">Volunteer adjustment: 20-30 min</div>
           </div>
-        </div>
-        <div class="config-display">
-          <div class="config-diagram" id="configDiagram">[Configuration Diagram Placeholder]</div>
-          <h3 id="configTitle">90° seated with foot pegs</h3>
-          <ul id="configBullets"></ul>
         </div>
       </div>
       <div class="print-config-list">
         <div class="print-config-card">
           <div class="pill">Position 1</div>
-          <h3 style="margin-top:0.8rem;">90-degree seated with foot pegs</h3>
+          <div class="media-surface">
+            <img class="media-image" src="assets/position 1.png" alt="Position 1 rider seating configuration" width="702" height="496" />
+          </div>
+          <h3>90-degree seated with foot pegs</h3>
           <ul>
             <li>Upright seated posture for stable trunk support.</li>
             <li>Foot pegs position lower legs in controlled neutral placement.</li>
@@ -1056,7 +1087,10 @@
         </div>
         <div class="print-config-card">
           <div class="pill">Position 2</div>
-          <h3 style="margin-top:0.8rem;">45-degree forward position with foot pads</h3>
+          <div class="media-surface">
+            <img class="media-image" src="assets/position 2.png" alt="Position 2 rider seating configuration" width="702" height="496" />
+          </div>
+          <h3>45-degree forward position with foot pads</h3>
           <ul>
             <li>Forward-leaning setup can improve rider engagement with terrain.</li>
             <li>Foot pads support broader lower-limb contact area.</li>
@@ -1065,7 +1099,10 @@
         </div>
         <div class="print-config-card">
           <div class="pill">Position 3</div>
-          <h3 style="margin-top:0.8rem;">Long-sitting configuration with adjustable leg supports</h3>
+          <div class="media-surface">
+            <img class="media-image" src="assets/position 3.png" alt="Position 3 rider seating configuration" width="702" height="496" />
+          </div>
+          <h3>Long-sitting configuration with adjustable leg supports</h3>
           <ul>
             <li>Leg supports provide extended lower-limb guidance.</li>
             <li>Accommodates long-sitting users requiring different hip and knee angles.</li>
@@ -1207,17 +1244,23 @@
     const configs = {
       1: {
         label: 'Position 1',
-        title: '90° seated with foot pegs',
+        title: '90-degree seated with foot pegs',
+        image: 'assets/position 1.png',
+        alt: 'Position 1 rider seating configuration',
         bullets: ['Upright seated posture for stable trunk support.', 'Foot pegs position lower legs in controlled neutral placement.', 'Useful for riders needing frequent stop/start supervision.']
       },
       2: {
         label: 'Position 2',
-        title: '45° forward position with foot pads',
+        title: '45-degree forward position with foot pads',
+        image: 'assets/position 2.png',
+        alt: 'Position 2 rider seating configuration',
         bullets: ['Forward-leaning setup can improve rider engagement with terrain.', 'Foot pads support broader lower-limb contact area.', 'Supports riders transitioning from upright to dynamic posture.']
       },
       3: {
         label: 'Position 3',
         title: 'Long-sitting configuration with adjustable leg supports',
+        image: 'assets/position 3.png',
+        alt: 'Position 3 rider seating configuration',
         bullets: ['Leg supports provide extended lower-limb guidance.', 'Accommodates long-sitting users requiring different hip and knee angles.', 'Helps maintain consistent posture over longer outings.']
       }
     };
@@ -1226,16 +1269,22 @@
     const label = document.getElementById('positionLabel');
     const title = document.getElementById('configTitle');
     const bullets = document.getElementById('configBullets');
-    const diagram = document.getElementById('configDiagram');
+    const configImage = document.getElementById('configImage');
     const expandAllButton = document.getElementById('expandAllButton');
     const cards = Array.from(document.querySelectorAll('.feature-card, .tile'));
     const detailBlocks = Array.from(document.querySelectorAll('details'));
+    const screenshotShortcut = {
+      key: 'D',
+      shiftKey: true,
+      altKey: true
+    };
 
     function renderConfig(position) {
       const cfg = configs[position];
       label.textContent = cfg.label;
       title.textContent = cfg.title;
-      diagram.textContent = `[${cfg.label} Diagram Placeholder]`;
+      configImage.src = cfg.image;
+      configImage.alt = cfg.alt;
       bullets.innerHTML = cfg.bullets.map((item) => `<li>${item}</li>`).join('');
     }
 
@@ -1243,6 +1292,10 @@
     renderConfig(1);
 
     function syncExpandAllButton() {
+      if (document.body.classList.contains('screenshot-mode')) {
+        return;
+      }
+
       const allCardsOpen = cards.every((card) => card.classList.contains('active'));
       const allDetailsOpen = detailBlocks.every((block) => block.open);
       const allOpen = allCardsOpen && allDetailsOpen;
@@ -1250,17 +1303,27 @@
       expandAllButton.setAttribute('aria-pressed', String(allOpen));
     }
 
-    expandAllButton.addEventListener('click', () => {
-      const allOpen = cards.every((card) => card.classList.contains('active')) && detailBlocks.every((block) => block.open);
-
+    function setExpandedState(isExpanded) {
       cards.forEach((card) => {
-        card.classList.toggle('active', !allOpen);
+        card.classList.toggle('active', isExpanded);
       });
 
       detailBlocks.forEach((block) => {
-        block.open = !allOpen;
+        block.open = isExpanded;
       });
+    }
 
+    function setScreenshotMode(isEnabled) {
+      document.body.classList.toggle('screenshot-mode', isEnabled);
+      setExpandedState(isEnabled);
+      if (!isEnabled) {
+        syncExpandAllButton();
+      }
+    }
+
+    expandAllButton.addEventListener('click', () => {
+      const allOpen = cards.every((card) => card.classList.contains('active')) && detailBlocks.every((block) => block.open);
+      setExpandedState(!allOpen);
       syncExpandAllButton();
     });
 
@@ -1275,6 +1338,26 @@
 
     detailBlocks.forEach((block) => {
       block.addEventListener('toggle', syncExpandAllButton);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (
+        event.key.toUpperCase() !== screenshotShortcut.key ||
+        event.shiftKey !== screenshotShortcut.shiftKey ||
+        event.altKey !== screenshotShortcut.altKey ||
+        event.ctrlKey ||
+        event.metaKey
+      ) {
+        return;
+      }
+
+      const tagName = event.target.tagName;
+      if (tagName === 'INPUT' || tagName === 'TEXTAREA' || event.target.isContentEditable) {
+        return;
+      }
+
+      event.preventDefault();
+      setScreenshotMode(!document.body.classList.contains('screenshot-mode'));
     });
 
     syncExpandAllButton();
