@@ -27,7 +27,38 @@ Any new thread working in `C:\_dev\Koine-ProductDemonstration` should read this 
   - rider configuration uses `assets/position 1.png`, `assets/position 2.png`, and `assets/position 3.png`
 - Image render areas are now width-driven with the native `702x496` aspect ratio.
 - In normal mode, the active rider-position image now appears directly under the Rider Adaptability heading, with the slider controls below it.
-- The bike title is now `KOINE RAINIER`, and the hero image appears directly above that title.
+- The bike title is now `RAINIER`.
+- Hero layout behavior:
+  - desktop/full-width: image sits beside the hero copy
+  - narrow/mobile: image stacks above the hero title and text
+- The hero render label is now a visible tag above the image rather than an overlay inside the image frame.
+- The company wordmark `assets/KOINE_Black.png` is placed below the `Interactive Technical Briefing` tag in the hero copy area.
+- `assets/KOINE_Favicon.png` is now used as the page favicon.
+- The page typography has been shifted to a sleeker sans-serif system to match the KOINE branding; serif headings are no longer used.
+- Contact section is now populated:
+  - Joshua Anderson
+  - Koine Adaptive
+  - info@koineadaptive.com
+  - koineadaptive.com [WIP]
+- Hero messaging updates:
+  - headline lead now reads: `An adaptive all-electric mountain bike. Designed for diversity, built for freedom.`
+  - hero chip now uses `Power to explore` instead of the earlier fleet-focused label
+  - hero metric cards are now clickable and reveal explanatory copy for weight, range, and target price
+- The page now includes a `Prototype Gallery` section near the top.
+- The gallery currently uses the newer physical-prototype JPG photos in `assets/` rather than the earlier render-only PNGs.
+- Two additional portrait forest-riding photos were added to the gallery, and gallery tiles no longer force a fixed crop ratio.
+- The gallery is intentionally split into landscape and portrait groups so mixed image ratios remain visually coherent.
+- Design Overview behavior:
+  - normal mode: compact tags sit over the side-profile image and expand to the right on hover/focus with explanatory text
+  - phone/narrow layouts: floating tags are disabled and replaced with the static component/function table to avoid overlap and clipping
+  - screenshot mode and print: hover tags are replaced with a static component/function table
+- Rider Adaptability copy has been revised for all three positions, both in the slider-driven live panel and in the screenshot/print cards.
+- Program Operations lead text no longer refers to page-scanning/highlight language.
+- Performance Specifications now include:
+  - Bafang geared motor or Grin MAX45 Fat Hub Motor
+  - 95 Nm max torque
+  - trail-type list
+  - tubeless configuration
 
 ## Project Goal
 
