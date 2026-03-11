@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adaptive Trail Trike Technical Briefing</title>
+  <title>RAINIER Adaptive Trail Trike Technical Briefing</title>
   <link rel="icon" type="image/png" href="assets/KOINE_Favicon.png" />
   <style>
     :root {
@@ -79,7 +79,7 @@
       margin-top: 1rem;
     }
 
-    body.screenshot-mode .config-controls,
+    body.screenshot-mode .config-nav,
     body.screenshot-mode .config-display {
       display: none;
     }
@@ -99,7 +99,7 @@
     }
 
     section {
-      padding: 4rem 0;
+      padding: 3.2rem 0;
       border-bottom: 1px solid rgba(53, 88, 67, 0.12);
       position: relative;
     }
@@ -631,10 +631,38 @@
       display: none;
     }
 
-    .slider-wrap {
+    .config-nav {
       margin-top: 1rem;
-      display: block;
-      max-width: 38rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(53, 88, 67, 0.12);
+    }
+
+    .config-tab {
+      appearance: none;
+      border: 1px solid transparent;
+      background: transparent;
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      color: var(--gray-700);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .config-tab.active {
+      background: #111111;
+      color: var(--white);
+      border-color: #111111;
+    }
+
+    .config-tab:hover,
+    .config-tab:focus-visible {
+      border-color: rgba(53, 88, 67, 0.16);
+      outline: none;
     }
 
     .config-display {
@@ -642,17 +670,63 @@
       border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
       background: linear-gradient(180deg, rgba(246, 248, 242, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
-      min-height: 220px;
       padding: 1.2rem;
       box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 1.4rem;
+      align-items: center;
     }
 
     .config-diagram {
       border: 2px dashed rgba(94, 139, 107, 0.38);
       border-radius: 14px;
-      margin-bottom: 0.9rem;
       background: rgba(255, 255, 255, 0.76);
       overflow: hidden;
+    }
+
+    .config-copy h3 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 1rem;
+    }
+
+    .config-bullets {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .config-bullets li {
+      position: relative;
+      padding-left: 2rem;
+      color: var(--gray-900);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .config-bullets li::before {
+      content: "âœ“";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #88b800;
+      font-weight: 800;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .config-support {
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(53, 88, 67, 0.12);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .config-support h3 {
+      margin-bottom: 0.6rem;
     }
 
     .diagram .media-surface,
@@ -798,6 +872,81 @@
       background: linear-gradient(140deg, rgba(243, 248, 242, 0.98) 0%, rgba(255, 255, 255, 0.98) 52%, rgba(245, 239, 229, 0.98) 100%);
     }
 
+    .paired-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .status-panel {
+      border: 1px solid rgba(53, 88, 67, 0.12);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(245, 247, 242, 0.96) 100%);
+      padding: 1.8rem;
+      box-shadow: var(--shadow);
+    }
+
+    .status-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .status-list li {
+      position: relative;
+      padding-left: 1.7rem;
+    }
+
+    .status-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: var(--status-dot, var(--forest-500));
+    }
+
+    .status-list strong {
+      display: block;
+      color: var(--forest-950);
+      margin-bottom: 0.25rem;
+    }
+
+    .pilot-panel {
+      border-radius: 24px;
+      padding: 1.8rem;
+      background: linear-gradient(180deg, #8dce00 0%, #8bc800 100%);
+      box-shadow: 0 22px 40px rgba(76, 112, 7, 0.18);
+    }
+
+    .pilot-panel h2,
+    .pilot-panel p,
+    .pilot-panel li,
+    .pilot-panel strong {
+      color: #173218;
+    }
+
+    .pilot-panel h2 {
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+    }
+
+    .pilot-inner {
+      margin: 1.4rem 0;
+      padding: 1.3rem 1.4rem;
+      border-radius: 20px;
+      background: rgba(248, 248, 236, 0.86);
+    }
+
+    .pilot-inner ul {
+      margin-top: 0.8rem;
+    }
+
     .feature-card,
     .tile,
     details,
@@ -898,6 +1047,25 @@
       .gallery-grid-portrait {
         grid-template-columns: 1fr;
         max-width: none;
+      }
+      .paired-grid {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+      }
+      .config-display {
+        grid-template-columns: 1fr;
+      }
+      .config-nav {
+        gap: 0.6rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 0.4rem;
+      }
+      .config-tab {
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: center;
+        white-space: nowrap;
       }
       .diagram .callout {
         display: none;
@@ -1088,7 +1256,7 @@
           <div class="hero-kicker">Interactive Technical Briefing</div>
           <img class="hero-brand" src="assets/KOINE_Black.png" alt="Koine" width="2169" height="534" />
           <h1>RAINIER</h1>
-          <p class="hero-lead"><strong>An adaptive all-electric mountain bike. Designed for diversity, built for freedom.</strong></p>
+          <p class="hero-lead"><strong>An adaptive all-electric trail trike. Designed for diversity, built for freedom.</strong></p>
           <div class="hero-meta">
             <div class="hero-chip">Forest-ready durability</div>
             <div class="hero-chip">Inclusive rider fit</div>
@@ -1099,7 +1267,7 @@
             <article class="metric-card" tabindex="0">
               <div class="value">&lt; 70 lbs</div>
               <div>Weight</div>
-              <div class="metric-panel">Our lightweight seating system and all-electric frame enable one of the lightest powered adaptive bikes on the market.</div>
+              <div class="metric-panel">Our lightweight seating system and all-electric frame enable one of the lightest powered adaptive trail trikes on the market.</div>
             </article>
             <article class="metric-card" tabindex="0">
               <div class="value">40-80 miles</div>
@@ -1241,21 +1409,26 @@
   <section>
     <div class="container">
       <h2 class="section-title">Rider Adaptability</h2>
-      <p class="section-lead">Use the configuration slider to move between supported rider positions and review the fixed adjustment points below.</p>
+      <p class="section-lead">Use the position controls to move between supported rider setups and review the fixed adjustment points below.</p>
+      <div class="config-nav" role="tablist" aria-label="Rider positions">
+        <button class="config-tab active" type="button" data-position="1" role="tab" aria-selected="true">1. 90&deg; Seated</button>
+        <button class="config-tab" type="button" data-position="2" role="tab" aria-selected="false">2. 45&deg; Forward</button>
+        <button class="config-tab" type="button" data-position="3" role="tab" aria-selected="false">3. Long-Sitting</button>
+      </div>
       <div class="config-display">
         <div class="config-diagram">
           <div class="media-surface">
             <img id="configImage" class="media-image" src="assets/position 1.png" alt="Position 1 rider seating configuration" width="702" height="496" />
           </div>
         </div>
-        <h3 id="configTitle">90-degree seated with foot pegs</h3>
-        <ul id="configBullets"></ul>
+        <div class="config-copy">
+          <h3 id="configTitle">90-degree seated with foot pegs</h3>
+          <ul id="configBullets" class="config-bullets"></ul>
+        </div>
       </div>
-      <div class="slider-wrap">
-        <div class="config-controls">
-          <label for="configSlider"><strong>Rider configuration</strong></label>
-          <input id="configSlider" type="range" min="1" max="3" step="1" value="1" style="width:100%; margin-top:0.7rem;" />
-          <div id="positionLabel" class="pill" style="margin-top:0.8rem;">Position 1</div>
+      <div class="config-support">
+        <div>
+          <strong>Fixed Adjustment Points</strong>
           <h3 style="margin-top:1rem;">Static Adjustment Points</h3>
           <ul>
             <li>Backrest height (removable)</li>
@@ -1303,7 +1476,7 @@
           </div>
           <h3>Long-sitting configuration with adjustable leg supports</h3>
           <ul>
-            <li>Great for riders already used to standard adaptive mountain bike seating interfaces.</li>
+            <li>Great for riders already used to standard adaptive off-road seating interfaces.</li>
             <li>Leg supports provide extended lower-limb guidance.</li>
             <li>Wide adjustability accommodates anthropometric diversity.</li>
           </ul>
@@ -1314,37 +1487,38 @@
 
   <section>
     <div class="container">
-      <h2 class="section-title">Program Operations</h2>
-      <p class="section-lead">Operational constraints are presented as expandable tiles so volunteer and fleet details remain accessible without overloading the initial read.</p>
-      <div class="operations-grid">
-        <article class="tile"><h3>Bike Weight</h3><p><strong>&lt; 70 lbs</strong></p><div class="tile-panel">Allows one volunteer to reposition bike for staging and short loading tasks.</div></article>
-        <article class="tile"><h3>Unload Time</h3><p><strong>&lt; 5 minutes</strong></p><div class="tile-panel">Designed for quick unloading from common racks and trailers with minimal handling complexity.</div></article>
-        <article class="tile"><h3>Setup Time</h3><p><strong>Typically &lt; 10 minutes</strong></p><div class="tile-panel">Typical setup after rider is selected and baseline seat settings are known.</div></article>
-        <article class="tile"><h3>Transport Compatibility</h3><p><strong>Fits existing transport solutions</strong></p><div class="tile-panel">No dedicated trailer architecture planned for baseline operations.</div></article>
-        <article class="tile"><h3>Volunteer Requirement</h3><p><strong>Single volunteer handling</strong></p><div class="tile-panel">Routine movement and setup tasks are intended to be handled by one trained volunteer.</div></article>
+      <div class="paired-grid">
+        <div>
+          <h2 class="section-title">Program Operations</h2>
+          <p class="section-lead">Operational constraints are presented as expandable tiles so volunteer and fleet details remain accessible without overloading the initial read.</p>
+          <div class="operations-grid">
+            <article class="tile"><h3>Bike Weight</h3><p><strong>&lt; 70 lbs</strong></p><div class="tile-panel">Allows one volunteer to reposition bike for staging and short loading tasks.</div></article>
+            <article class="tile"><h3>Unload Time</h3><p><strong>&lt; 5 minutes</strong></p><div class="tile-panel">Designed for quick unloading from common racks and trailers with minimal handling complexity.</div></article>
+            <article class="tile"><h3>Setup Time</h3><p><strong>Typically &lt; 10 minutes</strong></p><div class="tile-panel">Typical setup after rider is selected and baseline seat settings are known.</div></article>
+            <article class="tile"><h3>Transport Compatibility</h3><p><strong>Fits existing transport solutions</strong></p><div class="tile-panel">No dedicated trailer architecture planned for baseline operations.</div></article>
+            <article class="tile"><h3>Volunteer Requirement</h3><p><strong>Single volunteer handling</strong></p><div class="tile-panel">Routine movement and setup tasks are intended to be handled by one trained volunteer.</div></article>
+          </div>
+        </div>
+        <div>
+          <h2 class="section-title">Maintenance &amp; Durability</h2>
+          <details open>
+            <summary>Frame Materials</summary>
+            <ul><li>4130 chromoly steel</li><li>Aluminum components</li></ul>
+          </details>
+          <details>
+            <summary>Component Strategy</summary>
+            <ul><li>Standard bicycle components wherever possible</li><li>Minimal custom components</li><li>All serviceable via normal bike shops</li></ul>
+          </details>
+          <details>
+            <summary>Fastener Standardization</summary>
+            <p>Only two fastener sizes: <strong>M5</strong> and <strong>M8</strong>. Shared lengths allow easy interchange.</p>
+          </details>
+          <details>
+            <summary>Routine Maintenance</summary>
+            <ul><li>Pre-ride inspection</li><li>Seasonal service</li><li>Estimated seasonal consumables: <strong>&lt; $50</strong></li></ul>
+          </details>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 class="section-title">Maintenance and Durability</h2>
-      <details open>
-        <summary>Frame Materials</summary>
-        <ul><li>4130 chromoly steel</li><li>Aluminum components</li></ul>
-      </details>
-      <details>
-        <summary>Component Strategy</summary>
-        <ul><li>Standard bicycle components wherever possible</li><li>Minimal custom components</li><li>All serviceable via normal bike shops</li></ul>
-      </details>
-      <details>
-        <summary>Fastener Standardization</summary>
-        <p>Only two fastener sizes: <strong>M5</strong> and <strong>M8</strong>. Shared lengths allow easy interchange.</p>
-      </details>
-      <details>
-        <summary>Routine Maintenance</summary>
-        <ul><li>Pre-ride inspection</li><li>Seasonal service</li><li>Estimated seasonal consumables: <strong>&lt; $50</strong></li></ul>
-      </details>
     </div>
   </section>
 
@@ -1374,14 +1548,14 @@
       <div class="compare-wrap">
         <table class="compare-table">
           <thead>
-            <tr><th>Feature</th><th>This Bike</th><th>Typical Adaptive MTB</th><th>NotAWheelchair – The Rig</th></tr>
+            <tr><th>Feature</th><th>This Bike</th><th>Typical Adaptive MTB</th><th>NotAWheelchair - The Rig</th></tr>
           </thead>
           <tbody>
             <tr data-similar="false"><td>Target Rider Groups</td><td>Riders requiring high support flexibility and transfer options</td><td>Often optimized for specific mobility profiles</td><td>Broad recreational audience with defined seated posture</td></tr>
-            <tr data-similar="false"><td>Price</td><td>$5k–$7.5k target</td><td>Often higher depending on configuration</td><td>Market pricing varies by package and region</td></tr>
+            <tr data-similar="false"><td>Price</td><td>$5k-$7.5k target</td><td>Often higher depending on configuration</td><td>Market pricing varies by package and region</td></tr>
             <tr data-similar="false"><td>Adjustability</td><td>Three primary rider position modes</td><td>Varies by model; many require accessory kits</td><td>Model-specific fit system</td></tr>
-            <tr data-similar="false"><td>Motor Power</td><td>2000W rear hub motor</td><td>Commonly lower nominal power ranges</td><td>Published power varies by version</td></tr>
-            <tr data-similar="true"><td>Range</td><td>40–80 miles</td><td>Comparable range depending terrain and assist level</td><td>Comparable range depending battery and route</td></tr>
+            <tr data-similar="false"><td>Motor Configuration</td><td>Rear hub motor optimized for high-torque assist</td><td>Commonly lower nominal power ranges</td><td>Published power varies by version</td></tr>
+            <tr data-similar="true"><td>Range</td><td>40-80 miles</td><td>Comparable range depending terrain and assist level</td><td>Comparable range depending battery and route</td></tr>
             <tr data-similar="false"><td>Maintenance Complexity</td><td>Standardized fasteners and low custom parts</td><td>Can include proprietary components</td><td>Mixed standard/proprietary service profile</td></tr>
             <tr data-similar="false"><td>Volunteer Setup Time</td><td>Typically under 10 minutes after baseline fit</td><td>Varies; can be longer for highly customized setups</td><td>Varies by rider fit adjustments</td></tr>
             <tr data-similar="false"><td>Fleet Adaptability</td><td>Designed for existing program transport and service workflow</td><td>Depends on platform dimensions and support equipment</td><td>Depends on fleet handling practices</td></tr>
@@ -1393,28 +1567,33 @@
 
   <section>
     <div class="container">
-      <h2 class="section-title">Prototype Status</h2>
-      <div class="timeline">
-        <div class="timeline-item"><strong>Prototype Generation:</strong> Gen-1</div>
-        <div class="timeline-item"><strong>Field Testing Completed:</strong> California, Utah, Washington, British Columbia</div>
-        <div class="timeline-item"><strong>Current Validation Focus:</strong> Testing across broader disability populations</div>
-        <div class="timeline-item"><strong>Production Timeline:</strong> ~1 year estimated; early demo units produced domestically</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 class="section-title">Pilot Program Opportunity</h2>
-      <div class="cta-panel">
-        <p>We are seeking adaptive sports programs interested in piloting early units.</p>
-        <p>Pilot programs will help validate:</p>
-        <ul>
-          <li>rider adaptability</li>
-          <li>volunteer workflows</li>
-          <li>fleet integration</li>
-        </ul>
-        <p>Participating programs receive early access and direct input into design refinement.</p>
+      <div class="paired-grid">
+        <div>
+          <h2 class="section-title">Prototype Status</h2>
+          <div class="status-panel">
+            <ul class="status-list">
+              <li style="--status-dot:#4c78df;"><strong>Prototype Generation: Gen-1</strong></li>
+              <li style="--status-dot:#48b75d;"><strong>Field Testing Completed:</strong> California, Utah, Washington, British Columbia</li>
+              <li style="--status-dot:#d7a401;"><strong>Current Validation Focus:</strong> Testing across broader disability populations</li>
+              <li style="--status-dot:#9a5de1;"><strong>Production Timeline Focus:</strong> ~1 year estimated; early demo units produced domestically</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="pilot-panel">
+            <h2>Pilot Program Opportunity</h2>
+            <p>We are seeking adaptive sports programs interested in piloting early units.</p>
+            <div class="pilot-inner">
+              <strong>Pilot programs will help validate:</strong>
+              <ul>
+                <li>Rider adaptability</li>
+                <li>Volunteer workflows</li>
+                <li>Fleet integration</li>
+              </ul>
+            </div>
+            <p>Participating programs receive early access and direct input into design refinement.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1426,7 +1605,7 @@
         <div class="contact-card"><strong>Name</strong><p>Joshua Anderson</p></div>
         <div class="contact-card"><strong>Organization</strong><p>Koine Adaptive</p></div>
         <div class="contact-card"><strong>Email</strong><p>info@koineadaptive.com</p></div>
-        <div class="contact-card"><strong>Website</strong><p>koineadaptive.com [WIP]</p></div>
+        <div class="contact-card"><strong>Website</strong><p><a href="https://koineadaptive.com">koineadaptive.com</a></p></div>
       </div>
     </div>
   </section>
@@ -1463,12 +1642,11 @@
         title: 'Long-sitting configuration with adjustable leg supports',
         image: 'assets/position 3.png',
         alt: 'Position 3 rider seating configuration',
-        bullets: ['Great for riders already used to standard adaptive mountain bike seating interfaces.', 'Leg supports provide extended lower-limb guidance.', 'Wide adjustability accommodates anthropometric diversity.']
+        bullets: ['Great for riders already used to standard adaptive off-road seating interfaces.', 'Leg supports provide extended lower-limb guidance.', 'Wide adjustability accommodates anthropometric diversity.']
       }
     };
 
-    const slider = document.getElementById('configSlider');
-    const label = document.getElementById('positionLabel');
+    const configTabs = Array.from(document.querySelectorAll('.config-tab'));
     const title = document.getElementById('configTitle');
     const bullets = document.getElementById('configBullets');
     const configImage = document.getElementById('configImage');
@@ -1483,14 +1661,21 @@
 
     function renderConfig(position) {
       const cfg = configs[position];
-      label.textContent = cfg.label;
       title.textContent = cfg.title;
       configImage.src = cfg.image;
       configImage.alt = cfg.alt;
       bullets.innerHTML = cfg.bullets.map((item) => `<li>${item}</li>`).join('');
+      configTabs.forEach((tab) => {
+        const isActive = tab.dataset.position === String(position);
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+      });
     }
 
-    slider.addEventListener('input', (e) => renderConfig(e.target.value));
+    configTabs.forEach((tab) => {
+      tab.addEventListener('click', () => renderConfig(tab.dataset.position));
+    });
+
     renderConfig(1);
 
     function syncExpandAllButton() {
@@ -1567,3 +1752,5 @@
   </script>
 </body>
 </html>
+
+
