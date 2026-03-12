@@ -279,6 +279,10 @@
       appearance: none;
       border: 0;
       border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
       padding: 0.8rem 1.1rem;
       background: linear-gradient(135deg, var(--forest-900) 0%, var(--forest-700) 100%);
       color: var(--white);
@@ -286,6 +290,7 @@
       font-size: 0.92rem;
       font-weight: 700;
       letter-spacing: 0.02em;
+      white-space: nowrap;
       cursor: pointer;
       box-shadow: 0 16px 30px rgba(31, 58, 45, 0.18);
       transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
@@ -645,6 +650,10 @@
       border: 1px solid transparent;
       background: transparent;
       border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
       padding: 0.8rem 1rem;
       color: var(--gray-700);
       font: inherit;
@@ -1054,6 +1063,9 @@
         text-align: center;
         white-space: nowrap;
       }
+      .config-tab-index {
+        display: none;
+      }
       .diagram .callout {
         display: none;
       }
@@ -1067,8 +1079,7 @@
         bottom: 0.8rem;
       }
       .action-button {
-        width: min(88vw, 320px);
-        justify-content: center;
+        max-width: calc(100vw - 1.6rem);
       }
       body.screenshot-mode .print-config-list {
         grid-template-columns: 1fr;
@@ -1398,9 +1409,9 @@
       <h2 class="section-title">Rider Adaptability</h2>
       <p class="section-lead">Use the position controls to move between supported rider setups and review the fixed adjustment points below.</p>
       <div class="config-nav" role="tablist" aria-label="Rider positions">
-        <button class="config-tab active" type="button" data-position="1" role="tab" aria-selected="true">1. 90&deg; Seated</button>
-        <button class="config-tab" type="button" data-position="2" role="tab" aria-selected="false">2. 45&deg; Forward</button>
-        <button class="config-tab" type="button" data-position="3" role="tab" aria-selected="false">3. Long-Sitting</button>
+        <button class="config-tab active" type="button" data-position="1" role="tab" aria-selected="true"><span class="config-tab-index">1.</span><span class="config-tab-label">90&deg; Seated</span></button>
+        <button class="config-tab" type="button" data-position="2" role="tab" aria-selected="false"><span class="config-tab-index">2.</span><span class="config-tab-label">45&deg; Forward</span></button>
+        <button class="config-tab" type="button" data-position="3" role="tab" aria-selected="false"><span class="config-tab-index">3.</span><span class="config-tab-label">Long-Sitting</span></button>
       </div>
       <div class="config-display">
         <div class="config-diagram">
