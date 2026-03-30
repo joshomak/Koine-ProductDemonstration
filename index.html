@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAINIER Adaptive Trail Trike Technical Briefing</title>
+  <title>RAINIER Adaptive Trail Trike — Koine Adaptive</title>
   <link rel="icon" type="image/png" href="assets/KOINE_Favicon.png" />
   <style>
     :root {
@@ -29,94 +29,16 @@
       --font-display: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", "Helvetica Neue", sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
+    html { scroll-behavior: smooth; }
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: var(--font-sans);
       color: var(--gray-900);
-      background:
-        radial-gradient(circle at top left, rgba(140, 110, 77, 0.08), transparent 28%),
-        radial-gradient(circle at top right, rgba(53, 88, 67, 0.1), transparent 26%),
-        linear-gradient(180deg, #fbfcf8 0%, #f5f7f1 100%);
+      background: #f3f5ef;
       line-height: 1.6;
       letter-spacing: -0.01em;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.22;
-      background:
-        linear-gradient(115deg, rgba(255, 255, 255, 0.28) 0%, transparent 42%),
-        repeating-linear-gradient(135deg, rgba(94, 139, 107, 0.035) 0 2px, transparent 2px 22px);
-      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
-      z-index: 0;
-    }
-
-    body.screenshot-mode .floating-action {
-      display: none !important;
-    }
-
-    body.screenshot-mode .feature-panel,
-    body.screenshot-mode .tile-panel {
-      display: block;
-    }
-
-    body.screenshot-mode .diagram .callout {
-      display: none;
-    }
-
-    body.screenshot-mode .design-callout-table {
-      display: block;
-      margin-top: 1rem;
-    }
-
-    body.screenshot-mode .config-nav,
-    body.screenshot-mode .config-display {
-      display: none;
-    }
-
-    body.screenshot-mode .print-config-list {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .container {
-      width: min(1120px, 92vw);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    section {
-      padding: 3.2rem 0;
-      border-bottom: 1px solid rgba(53, 88, 67, 0.12);
-      position: relative;
-    }
-
-    section:not(.hero)::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: min(1120px, 92vw);
-      height: 1px;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, transparent 0%, rgba(140, 110, 77, 0.35) 18%, rgba(53, 88, 67, 0.22) 52%, transparent 100%);
-    }
-
-    section:nth-of-type(odd):not(.hero) {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(244, 247, 240, 0.86) 100%);
     }
 
     h1, h2, h3 {
@@ -127,110 +49,98 @@
       font-weight: 800;
       letter-spacing: -0.035em;
     }
-
-    h1 { font-size: clamp(2.5rem, 5vw, 4.1rem); }
-    h2 { font-size: clamp(1.7rem, 3vw, 2.35rem); }
-    h3 {
-      font-size: 1.08rem;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-    }
-
+    h1 { font-size: clamp(2.8rem, 5.5vw, 4.8rem); }
+    h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); }
+    h3 { font-size: 1.08rem; line-height: 1.18; letter-spacing: -0.02em; }
     p { margin: 0.3rem 0 1rem; color: var(--gray-700); }
-
     ul { margin: 0.2rem 0 0.2rem 1.2rem; padding: 0; }
 
-    .section-title {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .section-title::before {
-      content: "";
-      width: 42px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--earth-500), var(--forest-700));
-    }
-
-    .section-lead {
-      max-width: 42rem;
-      margin-bottom: 1.4rem;
-      font-size: 1rem;
-    }
-
-    .hero {
-      background:
-        radial-gradient(circle at 15% 18%, rgba(140, 110, 77, 0.15), transparent 26%),
-        radial-gradient(circle at 88% 12%, rgba(53, 88, 67, 0.16), transparent 24%),
-        linear-gradient(155deg, #eef3ea 0%, #fcfdf9 48%, #f0ebdf 100%);
-      min-height: 92vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(6px);
-      opacity: 0.55;
-      pointer-events: none;
-    }
-
-    .hero::before {
-      width: 320px;
-      height: 320px;
-      top: -120px;
-      right: -70px;
-      background: radial-gradient(circle, rgba(53, 88, 67, 0.18) 0%, rgba(53, 88, 67, 0) 72%);
-    }
-
-    .hero::after {
-      width: 280px;
-      height: 280px;
-      left: -80px;
-      bottom: -120px;
-      background: radial-gradient(circle, rgba(140, 110, 77, 0.14) 0%, rgba(140, 110, 77, 0) 72%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 1.6rem;
-      align-items: stretch;
+    .container {
+      width: min(1160px, 92vw);
+      margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    .hero-copy {
-      padding: 1.4rem 0;
-      animation: rise-in 0.8s ease both;
+    section { padding: 5rem 0; }
+
+    section:not(.hero):not(.numbers-band):not(.status-pilot):not(.contact-section):nth-of-type(even) {
+      background: #ffffff;
+    }
+    section:not(.hero):not(.numbers-band):not(.status-pilot):not(.contact-section):nth-of-type(odd) {
+      background: linear-gradient(180deg, #f8faf4 0%, #f2f5ed 100%);
     }
 
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.55rem;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--earth-500);
+    }
+    .section-kicker::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--earth-500), var(--forest-500));
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+
+    .section-lead {
+      max-width: 44rem;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      color: var(--gray-700);
+    }
+
+    /* ═══════════════ HERO ═══════════════ */
+    .hero {
+      background:
+        radial-gradient(circle at 12% 16%, rgba(140, 110, 77, 0.13), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(53, 88, 67, 0.14), transparent 26%),
+        linear-gradient(155deg, #edf2e8 0%, #fcfdf9 50%, #f0ebdf 100%);
+      min-height: 95vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 5rem 0 7rem;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.16;
+      background: repeating-linear-gradient(135deg, rgba(94, 139, 107, 0.045) 0 2px, transparent 2px 24px);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-copy { animation: rise-in 0.8s ease both; }
     .hero-brand {
       display: block;
-      width: min(360px, 72vw);
+      width: min(340px, 68vw);
       height: auto;
-      margin: 0 0 0.95rem;
+      margin: 0 0 1rem;
     }
-
-    .hero-media {
-      align-self: center;
-    }
-
     .hero-kicker {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
-      margin-bottom: 1rem;
-      padding: 0.45rem 0.8rem;
+      margin-bottom: 1.2rem;
+      padding: 0.45rem 0.85rem;
       border-radius: 999px;
       border: 1px solid rgba(53, 88, 67, 0.18);
-      background: rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.76);
       color: var(--forest-700);
       font-size: 0.82rem;
       font-weight: 700;
@@ -238,93 +148,52 @@
       letter-spacing: 0.12em;
       backdrop-filter: blur(10px);
     }
-
     .hero-kicker::before {
       content: "";
-      width: 9px;
-      height: 9px;
+      width: 9px; height: 9px;
       border-radius: 50%;
       background: linear-gradient(180deg, var(--earth-500), var(--forest-500));
       box-shadow: 0 0 0 4px rgba(94, 139, 107, 0.12);
     }
-
-    .hero p strong {
-      color: var(--forest-950);
-    }
-
-    .hero-lead {
-      max-width: 40rem;
-      font-size: 1.08rem;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin: 1.2rem 0 0.8rem;
-    }
-
+    .hero-lead { font-size: 1.16rem; max-width: 38rem; color: var(--gray-700); }
+    .hero-lead strong { color: var(--forest-950); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 0.65rem; margin: 1.4rem 0 1rem; }
     .hero-chip {
-      padding: 0.55rem 0.8rem;
+      padding: 0.5rem 0.9rem;
       border-radius: 999px;
       border: 1px solid rgba(108, 89, 68, 0.18);
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.85);
       color: var(--earth-700);
       font-size: 0.92rem;
       font-weight: 700;
-      box-shadow: 0 10px 24px rgba(31, 58, 45, 0.05);
+      box-shadow: 0 8px 20px rgba(31, 58, 45, 0.05);
     }
-
-    .action-button {
-      appearance: none;
-      border: 0;
-      border-radius: 999px;
+    .hero-note {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: auto;
-      padding: 0.8rem 1.1rem;
-      background: linear-gradient(135deg, var(--forest-900) 0%, var(--forest-700) 100%);
-      color: var(--white);
-      font: inherit;
-      font-size: 0.92rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-      cursor: pointer;
-      box-shadow: 0 16px 30px rgba(31, 58, 45, 0.18);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+      padding: 0.5rem 0.85rem;
+      border: 1px solid rgba(53, 88, 67, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--forest-700);
+      font-size: 0.88rem;
+      font-weight: 600;
     }
-
-    .floating-action {
-      position: fixed;
-      right: 1.1rem;
-      bottom: 1.1rem;
-      z-index: 20;
-    }
-
-    .action-button:hover,
-    .action-button:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 36px rgba(31, 58, 45, 0.22);
-      filter: brightness(1.04);
-      outline: none;
-    }
-
     .image-frame {
       border: 1px solid rgba(53, 88, 67, 0.14);
-      border-radius: 26px;
+      border-radius: 28px;
       background: linear-gradient(145deg, rgba(244, 239, 229, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
-      padding: 1.15rem;
-      box-shadow: 0 28px 55px rgba(31, 58, 45, 0.1);
+      padding: 1.2rem;
+      box-shadow: 0 32px 60px rgba(31, 58, 45, 0.1);
       position: relative;
       animation: drift-in 0.95s ease both;
     }
-
     .image-label {
       display: inline-flex;
-      margin-bottom: 0.75rem;
-      padding: 0.35rem 0.65rem;
+      margin-bottom: 0.8rem;
+      padding: 0.35rem 0.7rem;
       border-radius: 999px;
       background: rgba(31, 58, 45, 0.88);
       color: var(--white);
@@ -333,118 +202,26 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-
     .image-frame::after {
       content: "";
       position: absolute;
       inset: 1rem;
-      border-radius: 18px;
+      border-radius: 20px;
       background: linear-gradient(180deg, rgba(248, 250, 246, 0.95) 0%, rgba(255, 255, 255, 1) 100%);
       border: 1px dashed rgba(94, 139, 107, 0.42);
     }
-
     .media-surface {
       position: relative;
       z-index: 1;
       width: 100%;
-      aspect-ratio: 702 / 496;
       border-radius: 18px;
       overflow: hidden;
-      background: linear-gradient(180deg, rgba(248, 250, 246, 0.95) 0%, rgba(255, 255, 255, 1) 100%);
+      background: rgba(248, 250, 246, 0.9);
     }
-
-    .media-image {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 1.2rem;
-    }
-
-    .interactive-note {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      margin: 0.35rem 0 1rem;
-      padding: 0.55rem 0.9rem;
-      border: 1px solid rgba(53, 88, 67, 0.14);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.84);
-      color: var(--forest-700);
-      font-size: 0.9rem;
-      font-weight: 600;
-      box-shadow: 0 14px 28px rgba(31, 58, 45, 0.06);
-    }
-
-    .metric-card, .tile, .feature-card, .callout, .cta-panel {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 246, 0.98) 100%);
-      border: 1px solid rgba(53, 88, 67, 0.12);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .metric-card::before, .tile::before, .feature-card::before, .cta-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, var(--forest-700) 0%, var(--earth-500) 70%, transparent 100%);
-    }
-
-    .metric-card {
-      padding: 1.2rem;
-      cursor: pointer;
-    }
-
-    .metric-card div:last-child {
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.78rem;
-      color: var(--earth-700);
-      font-weight: 700;
-    }
-
-    .metric-card:hover, .feature-card:hover, .tile:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 36px rgba(31, 58, 45, 0.14);
-      border-color: rgba(108, 89, 68, 0.2);
-    }
-
-    .metric-card .value {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--forest-700);
-      margin-bottom: 0.3rem;
-    }
-
-    .metric-panel {
-      margin-top: 0.8rem;
-      padding-top: 0.8rem;
-      border-top: 1px solid rgba(53, 88, 67, 0.12);
-      display: none;
-      color: var(--gray-700);
-      font-size: 0.92rem;
-      text-transform: none;
-      letter-spacing: 0;
-      line-height: 1.45;
-    }
-
-    .metric-card.active .metric-panel {
-      display: block;
-    }
-
+    .media-image { display: block; width: 100%; height: auto; }
     .scroll-cue {
       position: absolute;
-      bottom: 22px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
       color: var(--forest-700);
@@ -452,114 +229,224 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      opacity: 0.9;
+      opacity: 0.8;
     }
-
     .scroll-dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--forest-700);
       animation: bounce 1.2s infinite;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); opacity: 0.5; }
-      50% { transform: translateY(7px); opacity: 1; }
+    /* ═══════════════ NUMBERS BAND ═══════════════ */
+    .numbers-band {
+      background: linear-gradient(135deg, var(--forest-950) 0%, var(--forest-900) 60%, #1a3428 100%);
+      padding: 4.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .numbers-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 32px);
+    }
+    .numbers-band::after {
+      content: "";
+      position: absolute;
+      right: -120px; top: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(94, 139, 107, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      position: relative;
+      z-index: 1;
+    }
+    .number-stat {
+      padding: 2rem 2.5rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .number-stat:last-child { border-right: none; }
+    .number-kicker {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--moss-300);
+      margin-bottom: 0.5rem;
+    }
+    .number-value {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .number-detail {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.45;
+      max-width: 22rem;
+    }
+    .price-target-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0 0.6rem;
+    }
+    .price-target-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--forest-950);
+      background: rgba(141, 206, 0, 0.85);
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+    }
+    .price-target-value {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .price-track-wrap { margin-top: 1rem; }
+    .price-track-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--moss-300);
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .price-track {
+      height: 5px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .price-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--forest-500), #8dce00);
+      border-radius: 3px;
+      transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .feature-grid, .operations-grid {
+    /* ═══════════════ GALLERY ═══════════════ */
+    .gallery-hero-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 1fr 1fr;
       gap: 1rem;
+      height: 420px;
     }
-
-    .gallery-stack {
+    .gallery-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .gallery-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-hero-main { grid-row: 1 / 3; }
+    .gallery-portrait-strip {
       display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       margin-top: 1rem;
+      max-width: 680px;
     }
+    .gallery-portrait-strip .gallery-card { height: 380px; }
+    .gallery-portrait-strip img { object-position: top center; }
 
-    .gallery-grid-landscape,
-    .gallery-grid-portrait {
+    /* ═══════════════ PRODUCT (unified) ═══════════════ */
+    .product-grid {
       display: grid;
-      gap: 1rem;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 2.5rem;
       align-items: start;
     }
-
-    .gallery-grid-landscape {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .feature-grid-tight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
     }
-
-    .gallery-grid-portrait {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      max-width: 760px;
-    }
-
-    .gallery-card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 246, 0.98) 100%);
+    .feature-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(248,250,246,0.98) 100%);
       border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow: hidden;
-      padding: 1rem;
-    }
-
-    .gallery-card .media-surface {
-      aspect-ratio: auto;
-      background: transparent;
-      border-radius: 14px;
-    }
-
-    .feature-card {
       padding: 1.2rem;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      animation: rise-in 0.7s ease both;
     }
-
-    .feature-card::after,
-    .tile::after {
+    .feature-card::before {
       content: "";
       position: absolute;
-      right: -18px;
-      bottom: -18px;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(166, 133, 94, 0.12) 0%, rgba(166, 133, 94, 0) 72%);
-      pointer-events: none;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--forest-700) 0%, var(--earth-500) 70%, transparent 100%);
     }
-
-    .feature-panel, .tile-panel {
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 40px rgba(31, 58, 45, 0.12);
+      border-color: rgba(108, 89, 68, 0.2);
+    }
+    .feature-card:nth-child(5) { grid-column: 1 / -1; }
+    .feature-panel {
       margin-top: 0.8rem;
       border-top: 1px solid rgba(53, 88, 67, 0.12);
       padding-top: 0.8rem;
       display: none;
     }
-
-    .feature-card.active .feature-panel,
-    .tile.active .tile-panel {
-      display: block;
-    }
+    .feature-card.active .feature-panel { display: block; }
+    .feature-card:nth-child(2) { animation-delay: 0.05s; }
+    .feature-card:nth-child(3) { animation-delay: 0.1s; }
+    .feature-card:nth-child(4) { animation-delay: 0.15s; }
+    .feature-card:nth-child(5) { animation-delay: 0.2s; }
 
     .diagram-wrap {
-      margin-top: 1rem;
-      background: linear-gradient(180deg, rgba(250, 251, 248, 0.98) 0%, rgba(242, 245, 238, 0.98) 100%);
+      background: linear-gradient(180deg, rgba(250,251,248,0.98) 0%, rgba(242,245,238,0.98) 100%);
       border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
       padding: 1.2rem;
-      position: relative;
       box-shadow: var(--shadow);
     }
-
+    .diagram-label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--earth-700);
+      margin-bottom: 0.8rem;
+    }
     .diagram {
       position: relative;
       border: 2px dashed rgba(94, 139, 107, 0.42);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 246, 1) 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(248,250,246,1) 100%);
       padding: 1rem;
-      overflow: hidden;
+      overflow: visible;
     }
-
     .diagram::before {
       content: "";
       position: absolute;
@@ -571,36 +458,29 @@
       border-radius: inherit;
       pointer-events: none;
     }
-
     .callout {
       position: absolute;
       display: inline-flex;
       align-items: center;
-      padding: 0.55rem 0.7rem;
-      font-size: 0.84rem;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.82rem;
       cursor: default;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255,255,255,0.95);
       border: 1px solid rgba(53, 88, 67, 0.14);
-      box-shadow: 0 16px 28px rgba(31, 58, 45, 0.08);
+      box-shadow: 0 14px 24px rgba(31, 58, 45, 0.08);
       border-radius: 999px;
       white-space: nowrap;
       overflow: visible;
       z-index: 3;
-      transition: border-color 0.24s ease, box-shadow 0.24s ease, transform 0.24s ease;
+      transition: border-color 0.24s, box-shadow 0.24s, transform 0.24s;
     }
-
-    .callout:hover,
-    .callout:focus-visible {
+    .callout:hover, .callout:focus-visible {
       border-color: rgba(108, 89, 68, 0.24);
       box-shadow: 0 20px 34px rgba(31, 58, 45, 0.12);
       transform: translateY(-1px);
+      outline: none;
     }
-
-    .callout-label {
-      font-weight: 800;
-      color: var(--forest-900);
-    }
-
+    .callout-label { font-weight: 800; color: var(--forest-900); }
     .callout-copy {
       position: absolute;
       left: 0;
@@ -610,7 +490,7 @@
       padding: 0.7rem 0.8rem;
       border-radius: 14px;
       border: 1px solid rgba(53, 88, 67, 0.14);
-      background: rgba(255, 255, 255, 0.97);
+      background: rgba(255,255,255,0.97);
       box-shadow: 0 18px 30px rgba(31, 58, 45, 0.12);
       color: var(--gray-700);
       font-size: 0.78rem;
@@ -620,153 +500,227 @@
       transform: translateY(-4px);
       transition: opacity 0.18s ease, transform 0.2s ease;
     }
-
-    .callout:hover .callout-copy,
-    .callout:focus-visible .callout-copy {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .callout:hover .callout-copy, .callout:focus-visible .callout-copy { opacity: 1; transform: translateY(0); }
     .c1 { top: 12%; left: 8%; }
     .c2 { top: 66%; left: 61%; }
     .c3 { top: 40%; left: 67%; }
     .c4 { top: 22%; left: 42%; }
+    .design-callout-table { display: none; }
 
-    .design-callout-table {
-      display: none;
-    }
-
+    /* ═══════════════ RIDER ADAPTABILITY ═══════════════ */
     .config-nav {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(53, 88, 67, 0.12);
+      display: none;
+      flex-wrap: nowrap;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.4rem;
     }
-
     .config-tab {
       appearance: none;
-      border: 1px solid transparent;
-      background: transparent;
+      border: 1px solid rgba(53, 88, 67, 0.16);
+      background: rgba(255,255,255,0.8);
       border-radius: 14px;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      padding: 0.8rem 1rem;
+      gap: 0.3rem;
+      padding: 0.75rem 1rem;
       color: var(--gray-700);
       font: inherit;
       font-weight: 700;
+      white-space: nowrap;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      flex: 1 1 0;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
+    .config-tab.active { background: #111; color: #fff; border-color: #111; }
+    .config-tab:hover:not(.active) { border-color: rgba(53, 88, 67, 0.28); outline: none; }
+    .config-tab:focus-visible { outline: 2px solid var(--forest-700); outline-offset: 2px; }
+    .config-tab-index { opacity: 0.55; font-size: 0.88em; }
 
-    .config-tab.active {
-      background: #111111;
-      color: var(--white);
-      border-color: #111111;
+    .position-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
     }
-
-    .config-tab:hover,
-    .config-tab:focus-visible {
-      border-color: rgba(53, 88, 67, 0.16);
-      outline: none;
-    }
-
-    .config-display {
-      margin-top: 1rem;
-      border: 1px solid rgba(53, 88, 67, 0.12);
+    .position-thumb {
+      border: 2px solid rgba(53, 88, 67, 0.14);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(246, 248, 242, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
-      padding: 1.2rem;
+      background: rgba(255,255,255,0.9);
+      padding: 0.8rem;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
       box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-      gap: 1.4rem;
-      align-items: center;
     }
-
-    .config-diagram {
-      border: 2px dashed rgba(94, 139, 107, 0.38);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.76);
+    .position-thumb:hover { transform: translateY(-2px); border-color: rgba(53, 88, 67, 0.28); }
+    .position-thumb.active {
+      border-color: var(--forest-700);
+      box-shadow: 0 0 0 3px rgba(53, 88, 67, 0.12), 0 18px 36px rgba(31, 58, 45, 0.1);
+    }
+    .position-thumb-img {
+      width: 100%;
+      border-radius: 10px;
       overflow: hidden;
-    }
-
-    .config-copy h3 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      margin-bottom: 1rem;
-    }
-
-    .config-bullets {
-      margin: 0;
-      padding-left: 1.4rem;
-      display: grid;
-      gap: 1rem;
-    }
-
-    .config-bullets li {
-      color: var(--gray-900);
-      font-size: 1rem;
-      line-height: 1.5;
-      padding-left: 0.2rem;
-    }
-
-    .config-support {
-      margin-top: 1.2rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid rgba(53, 88, 67, 0.12);
-      display: grid;
-      gap: 1rem;
-    }
-
-    .config-support h3 {
+      background: rgba(248,250,246,0.9);
+      border: 1px dashed rgba(94,139,107,0.3);
       margin-bottom: 0.6rem;
     }
-
-    .diagram .media-surface,
-    .config-diagram .media-surface {
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.76);
+    .position-thumb-img img { display: block; width: 100%; height: auto; }
+    .position-thumb-label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--forest-700);
     }
-
-    .limits {
+    .position-detail {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 0.6rem;
-      margin-top: 1rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      border: 1px solid rgba(53, 88, 67, 0.12);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(246,248,242,0.95) 0%, rgba(255,255,255,0.95) 100%);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
     }
-
+    .position-detail-img {
+      border: 2px dashed rgba(94, 139, 107, 0.38);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.76);
+    }
+    .position-detail-img img { display: block; width: 100%; height: auto; }
+    .position-detail-copy h3 { font-size: clamp(1.3rem, 2.4vw, 1.85rem); margin-bottom: 0.9rem; }
+    .config-bullets { margin: 0; padding-left: 1.4rem; display: grid; gap: 0.8rem; }
+    .config-bullets li { color: var(--gray-900); font-size: 1rem; line-height: 1.5; }
+    .adjust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .adjust-box {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(53, 88, 67, 0.12);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+    .adjust-box h3 { margin-bottom: 0.6rem; }
     .pill {
+      display: inline-block;
       background: linear-gradient(180deg, #eef5ef 0%, #e6efe8 100%);
       border: 1px solid rgba(53, 88, 67, 0.14);
       border-radius: 999px;
-      padding: 0.45rem 0.8rem;
+      padding: 0.4rem 0.8rem;
       font-weight: 600;
       color: var(--forest-700);
-      width: fit-content;
+      font-size: 0.88rem;
+      margin: 0.25rem 0.25rem 0 0;
     }
+    .print-config-list { display: none; }
+    .print-config-card {
+      border: 1px solid rgba(53, 88, 67, 0.12);
+      border-radius: var(--radius);
+      padding: 1rem;
+      background: rgba(255,255,255,0.94);
+      box-shadow: var(--shadow);
+      margin-top: 0.8rem;
+    }
+    .print-config-card h3 { margin-top: 0.8rem; }
 
-    .tile {
-      padding: 1.15rem;
+    /* ═══════════════ FLEET OPERATIONS ═══════════════ */
+    .ops-stats-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border: 1px solid rgba(53, 88, 67, 0.12);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 2.5rem;
+    }
+    .ops-stat {
+      padding: 1.5rem 1.2rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(248,250,246,0.98) 100%);
+      border-right: 1px solid rgba(53, 88, 67, 0.1);
       cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
     }
-
+    .ops-stat:last-child { border-right: none; }
+    .ops-stat:hover { background: #eef4ec; }
+    .ops-stat::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--forest-700) 0%, var(--earth-500) 100%);
+    }
+    .ops-stat-value {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--forest-700);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .ops-stat-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--earth-700);
+    }
+    .tile-panel {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(53, 88, 67, 0.12);
+      display: none;
+      font-size: 0.86rem;
+      color: var(--gray-700);
+      line-height: 1.45;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .ops-stat.active .tile-panel { display: block; }
+    .maintenance-subhead {
+      margin: 0 0 1rem;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--earth-500);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .maintenance-subhead::before {
+      content: "";
+      width: 28px; height: 2px;
+      background: linear-gradient(90deg, var(--earth-500), var(--forest-500));
+      border-radius: 1px;
+    }
+    .maintenance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
     details {
       border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
       padding: 0.95rem 1rem;
-      background: rgba(255, 255, 255, 0.94);
-      margin-bottom: 0.8rem;
+      background: rgba(255,255,255,0.94);
       box-shadow: var(--shadow);
     }
-
     details[open] {
       border-color: rgba(108, 89, 68, 0.22);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 243, 237, 0.9) 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(247,243,237,0.9) 100%);
     }
-
     summary {
       font-weight: 700;
       color: var(--forest-900);
@@ -777,68 +731,54 @@
       justify-content: space-between;
       gap: 1rem;
     }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
+    summary::-webkit-details-marker { display: none; }
     summary::after {
       content: "+";
       display: inline-grid;
       place-items: center;
-      width: 1.6rem;
-      height: 1.6rem;
+      width: 1.5rem; height: 1.5rem;
       border-radius: 50%;
       background: rgba(53, 88, 67, 0.08);
       color: var(--forest-700);
       font-size: 1rem;
       flex: 0 0 auto;
     }
+    details[open] summary::after { content: "−"; }
 
-    details[open] summary::after {
-      content: "-";
+    /* ═══════════════ SPECS + COMPARISON ═══════════════ */
+    .spec-tabs-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .spec-tab-btn {
+      appearance: none;
+      border: 1px solid rgba(53, 88, 67, 0.16);
+      background: rgba(255,255,255,0.8);
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      color: var(--gray-700);
+      font: inherit;
+      font-weight: 700;
       font-size: 0.95rem;
-      background: rgba(255, 255, 255, 0.97);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
-
-    th, td {
-      border: 1px solid rgba(53, 88, 67, 0.1);
-      padding: 0.8rem 0.75rem;
-      text-align: left;
-      vertical-align: top;
-    }
-
-    tbody tr:nth-child(even) td {
-      background: rgba(243, 247, 241, 0.72);
-    }
-
-    .spec-table td:first-child,
-    .compare-table td:first-child { font-weight: 700; width: 24%; }
-
+    .spec-tab-btn.active { background: #111; color: #fff; border-color: #111; }
+    .spec-tab-btn:hover:not(.active) { border-color: rgba(53, 88, 67, 0.28); }
+    .spec-panel { display: none; }
+    .spec-panel.active { display: block; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: rgba(255,255,255,0.97); }
+    th, td { border: 1px solid rgba(53, 88, 67, 0.1); padding: 0.8rem 0.75rem; text-align: left; vertical-align: top; }
+    tbody tr:nth-child(even) td { background: rgba(243,247,241,0.72); }
+    .spec-table td:first-child { font-weight: 700; width: 26%; }
     .compare-wrap {
       overflow-x: auto;
       border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255,255,255,0.88);
     }
-
-    .compare-wrap::before {
-      content: "Market Positioning Snapshot";
-      display: block;
-      padding: 0.8rem 1rem 0.55rem;
-      color: var(--earth-700);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
     .compare-table thead th {
       position: sticky;
       top: 0;
@@ -846,407 +786,311 @@
       z-index: 1;
       color: var(--forest-950);
     }
+    .compare-table tbody tr:hover { background: rgba(238,245,239,0.9); }
+    .compare-table td:first-child { font-weight: 700; width: 18%; }
 
-    .compare-table tbody tr:hover { background: rgba(238, 245, 239, 0.9); }
-
-    .timeline {
-      display: grid;
-      gap: 0.7rem;
-      margin-top: 0.8rem;
-    }
-
-    .timeline-item {
-      border-left: 4px solid var(--forest-500);
-      background: linear-gradient(90deg, rgba(241, 247, 241, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
-      padding: 0.9rem 1rem;
-      border-radius: 0 14px 14px 0;
-      box-shadow: var(--shadow);
-    }
-
-    .cta-panel {
-      padding: 1.3rem;
-      background: linear-gradient(140deg, rgba(243, 248, 242, 0.98) 0%, rgba(255, 255, 255, 0.98) 52%, rgba(245, 239, 229, 0.98) 100%);
-    }
-
-    .paired-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .status-panel {
-      border: 1px solid rgba(53, 88, 67, 0.12);
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(245, 247, 242, 0.96) 100%);
-      padding: 1.8rem;
-      box-shadow: var(--shadow);
-    }
-
-    .status-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 1.4rem;
-    }
-
-    .status-list li {
+    /* ═══════════════ STATUS + PILOT ═══════════════ */
+    .status-pilot {
+      background: linear-gradient(160deg, var(--forest-950) 0%, #162b20 55%, #1c3225 100%);
+      padding: 5rem 0 0;
       position: relative;
-      padding-left: 1.7rem;
+      overflow: hidden;
     }
-
-    .status-list li::before {
+    .status-pilot::before {
       content: "";
       position: absolute;
-      left: 0;
-      top: 0.55rem;
-      width: 0.7rem;
-      height: 0.7rem;
-      border-radius: 50%;
-      background: var(--status-dot, var(--forest-500));
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 28px);
     }
-
-    .status-list strong {
-      display: block;
-      color: var(--forest-950);
-      margin-bottom: 0.25rem;
-    }
-
-    .pilot-panel {
-      border-radius: 24px;
-      padding: 1.8rem;
-      background: linear-gradient(180deg, #8dce00 0%, #8bc800 100%);
-      box-shadow: 0 22px 40px rgba(76, 112, 7, 0.18);
-    }
-
-    .pilot-panel h2,
-    .pilot-panel p,
-    .pilot-panel li,
-    .pilot-panel strong {
-      color: #173218;
-    }
-
-    .pilot-panel h2 {
+    .status-pilot-top { position: relative; z-index: 1; }
+    .status-dark-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.55rem;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: -0.03em;
+      color: var(--moss-300);
+    }
+    .status-dark-kicker::before {
+      content: "";
+      width: 28px; height: 2px;
+      background: var(--forest-500);
+      border-radius: 1px;
+    }
+    .status-pilot h2 { color: var(--white); margin-bottom: 2.5rem; }
+    .status-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 4rem;
+    }
+    .status-item {
+      padding: 0 2rem 0 0;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .status-item:last-child { border-right: none; }
+    .status-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--dot-color, var(--forest-500));
+      margin-bottom: 0.8rem;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.07);
+    }
+    .status-item strong {
+      display: block;
+      color: var(--white);
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+    .status-item span {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .pilot-full {
+      background: linear-gradient(155deg, #8dce00 0%, #7fb800 100%);
+      padding: 3.5rem 0;
+      position: relative;
+      z-index: 1;
+    }
+    .pilot-full-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .pilot-full h2 { color: #173218; text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 0.8rem; }
+    .pilot-full p { color: #1e3d1f; }
+    .pilot-full strong { color: #132614; }
+    .pilot-checklist {
+      background: rgba(248,248,236,0.82);
+      border-radius: 18px;
+      padding: 1.4rem 1.6rem;
+    }
+    .pilot-checklist strong { display: block; margin-bottom: 0.8rem; }
+    .pilot-checklist ul { margin-top: 0; }
+    .pilot-checklist li { color: #1e3d1f; }
+    .pilot-loi {
+      margin-top: 1.4rem;
+      padding: 1.2rem 1.4rem;
+      background: rgba(255,255,255,0.28);
+      border-radius: 14px;
+      border: 1px solid rgba(23, 50, 24, 0.18);
+    }
+    .pilot-loi-heading {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #173218;
+      margin-bottom: 0.5rem;
+    }
+    .pilot-loi p { font-size: 0.92rem; margin: 0; color: #1e3d1f; }
+    .pilot-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.6rem;
+    }
+    .pilot-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      border: none;
+    }
+    .pilot-btn:hover { transform: translateY(-2px); filter: brightness(0.96); }
+    .pilot-btn-primary {
+      background: #173218;
+      color: #f5efe5;
+      box-shadow: 0 10px 24px rgba(23, 50, 24, 0.22);
+    }
+    .pilot-btn-secondary {
+      background: rgba(255,255,255,0.6);
+      color: #173218;
+      border: 1px solid rgba(23, 50, 24, 0.25);
+      box-shadow: 0 8px 18px rgba(23, 50, 24, 0.1);
     }
 
-    .pilot-inner {
-      margin: 1.4rem 0;
-      padding: 1.3rem 1.4rem;
-      border-radius: 20px;
-      background: rgba(248, 248, 236, 0.86);
+    /* ═══════════════ CONTACT ═══════════════ */
+    .contact-section {
+      background: linear-gradient(180deg, #f8faf4 0%, #f0f4eb 100%);
+      padding: 4rem 0;
     }
-
-    .pilot-inner ul {
-      margin-top: 0.8rem;
-    }
-
-    .feature-card,
-    .tile,
-    details,
-    .timeline-item,
-    .contact-card {
-      animation: rise-in 0.7s ease both;
-    }
-
-    .feature-card:nth-child(2),
-    .tile:nth-child(2),
-    details:nth-of-type(2),
-    .timeline-item:nth-child(2),
-    .contact-card:nth-child(2) { animation-delay: 0.05s; }
-
-    .feature-card:nth-child(3),
-    .tile:nth-child(3),
-    details:nth-of-type(3),
-    .timeline-item:nth-child(3),
-    .contact-card:nth-child(3) { animation-delay: 0.1s; }
-
-    .feature-card:nth-child(4),
-    .tile:nth-child(4),
-    details:nth-of-type(4),
-    .timeline-item:nth-child(4),
-    .contact-card:nth-child(4) { animation-delay: 0.15s; }
-
-    .feature-card:nth-child(5),
-    .tile:nth-child(5) { animation-delay: 0.2s; }
-
-    @keyframes rise-in {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes drift-in {
-      from {
-        opacity: 0;
-        transform: translateX(24px) translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0) translateY(0);
-      }
-    }
-
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 0.8rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
-
     .contact-card {
       border: 1px solid rgba(53, 88, 67, 0.12);
       border-radius: var(--radius);
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.94);
+      padding: 1.2rem;
+      background: rgba(255,255,255,0.94);
       box-shadow: var(--shadow);
+      animation: rise-in 0.7s ease both;
+    }
+    .contact-card:nth-child(2) { animation-delay: 0.05s; }
+    .contact-card:nth-child(3) { animation-delay: 0.1s; }
+    .contact-card:nth-child(4) { animation-delay: 0.15s; }
+    .contact-card strong {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--earth-700);
+      font-weight: 800;
+    }
+    .contact-card p { margin: 0.3rem 0 0; color: var(--gray-900); font-size: 0.95rem; }
+
+    /* ═══════════════ FLOATING ACTION ═══════════════ */
+    .action-button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.2rem;
+      background: linear-gradient(135deg, var(--forest-900) 0%, var(--forest-700) 100%);
+      color: var(--white);
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 16px 30px rgba(31, 58, 45, 0.18);
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    }
+    .action-button:hover, .action-button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 36px rgba(31, 58, 45, 0.22);
+      filter: brightness(1.04);
+      outline: none;
+    }
+    .floating-action { position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 20; }
+
+    /* ═══════════════ ANIMATIONS ═══════════════ */
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes drift-in {
+      from { opacity: 0; transform: translateX(24px) translateY(10px); }
+      to { opacity: 1; transform: translateX(0) translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(7px); opacity: 1; }
     }
 
-    .print-config-list {
-      display: none;
-    }
-
-    .print-config-card {
-      border: 1px solid rgba(53, 88, 67, 0.12);
-      border-radius: var(--radius);
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: var(--shadow);
-      margin-top: 0.8rem;
-    }
-
-    .print-config-card h3 {
-      margin-top: 0.8rem;
-    }
-
-    .print-config-card .media-surface {
-      margin-top: 0.85rem;
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid { 
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      .hero-media {
-        order: -1;
-      }
-      .metrics { grid-template-columns: 1fr; }
-      .gallery-grid-landscape,
-      .gallery-grid-portrait {
-        grid-template-columns: 1fr;
-        max-width: none;
-      }
-      .paired-grid {
-        grid-template-columns: 1fr;
-        gap: 1.4rem;
-      }
-      .config-display {
-        grid-template-columns: 1fr;
-      }
-      .config-nav {
-        gap: 0.6rem;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 0.4rem;
-      }
-      .config-tab {
-        flex: 1 1 0;
-        min-width: 0;
-        text-align: center;
-        white-space: nowrap;
-      }
-      .config-tab-index {
-        display: none;
-      }
-      .diagram .callout {
-        display: none;
-      }
-      .design-callout-table {
-        display: block;
-        margin-top: 1rem;
-      }
+    /* ═══════════════ RESPONSIVE ═══════════════ */
+    @media (max-width: 960px) {
+      section { padding: 3.5rem 0; }
+      .hero { min-height: auto; padding: 3.5rem 0 5rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-media { order: -1; }
+      .numbers-grid { grid-template-columns: 1fr; }
+      .number-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1.5rem 1.5rem; }
+      .number-stat:last-child { border-bottom: none; }
+      .gallery-hero-grid { height: auto; grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gallery-hero-main { grid-row: auto; }
+      .gallery-hero-grid .gallery-card { height: 260px; }
+      .gallery-portrait-strip { grid-template-columns: 1fr; max-width: none; }
+      .gallery-portrait-strip .gallery-card { height: 300px; }
+      .product-grid { grid-template-columns: 1fr; }
+      .feature-grid-tight { grid-template-columns: 1fr; }
+      .feature-card:nth-child(5) { grid-column: auto; }
+      .diagram .callout { display: none; }
+      .design-callout-table { display: block; margin-top: 1rem; }
+      .position-selector { display: none; }
+      .config-nav { display: flex; }
+      .position-detail { grid-template-columns: 1fr; }
+      .adjust-grid { grid-template-columns: 1fr; }
+      .ops-stats-row { grid-template-columns: repeat(2, 1fr); border-radius: var(--radius); }
+      .ops-stat:nth-child(even) { border-right: none; }
+      .ops-stat { border-bottom: 1px solid rgba(53, 88, 67, 0.1); }
+      .ops-stat:nth-last-child(-n+1) { border-bottom: none; }
+      .maintenance-grid { grid-template-columns: 1fr; }
+      .status-timeline { grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+      .status-item { border-right: none; padding-right: 0; }
+      .pilot-full-inner { grid-template-columns: 1fr; gap: 1.5rem; }
       .scroll-cue { display: none; }
-      .floating-action {
-        right: 0.8rem;
-        bottom: 0.8rem;
-      }
-      .action-button {
-        max-width: calc(100vw - 1.6rem);
-      }
-      body.screenshot-mode .print-config-list {
-        grid-template-columns: 1fr;
-      }
+      .floating-action { right: 0.8rem; bottom: 0.8rem; }
     }
 
-    @page {
-      size: letter portrait;
-      margin: 0.35in;
+    @media (max-width: 580px) {
+      .ops-stats-row { grid-template-columns: 1fr; }
+      .ops-stat { border-right: none; }
+      .status-timeline { grid-template-columns: 1fr; }
+      .spec-tabs-nav { flex-wrap: wrap; }
     }
 
+    /* ═══════════════ SCREENSHOT / PRINT ═══════════════ */
+    body.screenshot-mode .floating-action { display: none !important; }
+    body.screenshot-mode .feature-panel { display: block; }
+    body.screenshot-mode .tile-panel { display: block; }
+    body.screenshot-mode .diagram .callout { display: none; }
+    body.screenshot-mode .design-callout-table { display: block; margin-top: 1rem; }
+    body.screenshot-mode .config-nav,
+    body.screenshot-mode .position-selector,
+    body.screenshot-mode .position-detail { display: none; }
+    body.screenshot-mode .print-config-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    body.screenshot-mode .spec-panel { display: block !important; }
+
+    @page { size: letter portrait; margin: 0.35in; }
     @media print {
-      html, body {
-        width: 100%;
-      }
-
-      body {
-        color: #000;
-        font-size: 16pt;
-        line-height: 1.6;
-        background: #fff;
-      }
-
-      body::before {
-        display: none;
-      }
-
-      .container {
-        width: 100%;
-        max-width: none;
-        padding: 0;
-      }
-
-      section {
-        padding: 0.14in 0;
-        border-bottom: 1px solid #d9d9d9;
-        page-break-inside: auto;
-        break-inside: auto;
-        background: #fff;
-      }
-
-      h1 { font-size: 31pt; }
-      h2 { font-size: 22pt; }
-      h3 { font-size: 15.5pt; }
-      p, li, summary, label, .pill { font-size: 14.5pt; }
-      .value { font-size: 18.5pt; }
-
-      h1, h2, h3 {
-        margin-bottom: 0.12in;
-        break-after: avoid;
-        page-break-after: avoid;
-      }
-
-      p, ul, table, details, .timeline, .compare-wrap, .diagram-wrap, .config-display {
-        margin-top: 0;
-        margin-bottom: 0.1in;
-      }
-
-      .hero {
-        min-height: auto;
-        display: block;
-        padding-top: 0.04in;
-        background: #fff;
-      }
-
-      .hero::before,
-      .hero::after,
-      section:not(.hero)::before {
-        display: none;
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metrics,
-      .feature-grid,
-      .operations-grid,
-      .contact-grid,
-      .limits {
-        grid-template-columns: 1fr;
-        gap: 0.14in;
-      }
-
-      .metric-card,
-      .tile,
-      .feature-card,
-      .callout,
-      .cta-panel,
-      .contact-card,
-      details,
-      .print-config-card {
-        padding: 0.12in;
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      .timeline-item,
-      .compare-wrap,
-      .diagram-wrap,
-      .config-display,
-      .print-config-list,
-      table,
-      tr {
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      .scroll-cue { display: none !important; }
+      html, body { width: 100%; }
+      body { color: #000; font-size: 16pt; line-height: 1.6; background: #fff; }
+      .container { width: 100%; max-width: none; padding: 0; }
+      section { padding: 0.14in 0; border-bottom: 1px solid #d9d9d9; background: #fff !important; }
+      .numbers-band, .status-pilot, .pilot-full { background: #fff !important; }
+      .number-value, .status-pilot h2, .pilot-full h2, .pilot-full p, .pilot-full li, .status-item strong, .status-item span, .number-detail { color: #000 !important; }
+      h1 { font-size: 31pt; } h2 { font-size: 22pt; } h3 { font-size: 15.5pt; }
+      .hero { min-height: auto; display: block; padding-top: 0.04in; background: #fff; }
+      .hero-grid, .product-grid, .pilot-full-inner { grid-template-columns: 1fr; }
+      .feature-grid-tight { grid-template-columns: 1fr; }
+      .feature-card:nth-child(5) { grid-column: auto; }
+      .ops-stats-row { grid-template-columns: 1fr 1fr; }
+      .status-timeline { grid-template-columns: 1fr 1fr; }
+      .scroll-cue, .floating-action, .hide-on-print { display: none !important; }
       .feature-panel, .tile-panel { display: block !important; }
       .diagram .callout { display: none !important; }
-      .design-callout-table { display: block !important; margin-top: 0.12in; }
-      .feature-card, .tile, details, .metric-card, .callout, .cta-panel, .compare-wrap, .contact-card, .config-display, .diagram-wrap, .timeline-item { box-shadow: none; }
-      .feature-card, .tile, details, .timeline-item, .contact-card, .hero-copy, .image-frame {
-        animation: none;
-      }
-      .compare-wrap {
-        overflow: visible;
-        border: 0;
-        background: #fff;
-      }
-      .compare-wrap::before {
-        padding: 0 0 0.08in;
-      }
-      table {
-        table-layout: fixed;
-      }
-
-      th,
-      td {
-        font-size: 10pt;
-        white-space: normal;
-        word-break: break-word;
-        overflow-wrap: anywhere;
-        hyphens: auto;
-        padding: 0.08in 0.06in;
-      }
-
-      .spec-table td:first-child,
-      .compare-table td:first-child,
-      .compare-table th:first-child {
-        width: 14%;
-      }
-
-      .compare-table thead th {
-        position: static;
-        font-size: 9.5pt;
-      }
-
-      .config-display {
-        display: none;
-      }
-
-      .print-config-list {
-        display: block;
-      }
-
-      .hide-on-print { display: none !important; }
-      .floating-action { display: none !important; }
-      input[type="range"] { display: none; }
+      .design-callout-table { display: block !important; }
+      .position-selector, .position-detail { display: none !important; }
+      .print-config-list { display: block !important; }
+      .spec-panel { display: block !important; }
+      .compare-wrap { overflow: visible; border: 0; background: #fff; }
+      table { table-layout: fixed; }
+      th, td { font-size: 10pt; white-space: normal; word-break: break-word; padding: 0.08in 0.06in; }
+      .feature-card, .contact-card, details, .image-frame { animation: none !important; box-shadow: none; }
+      .price-bar { width: 100% !important; }
     }
   </style>
 </head>
 <body>
+
   <div class="floating-action hide-on-print">
     <button id="expandAllButton" class="action-button" type="button" aria-pressed="false">Open All Details</button>
   </div>
+
+  <!-- 1. HERO -->
   <section class="hero">
     <div class="container">
       <div class="hero-grid">
@@ -1260,24 +1104,7 @@
             <div class="hero-chip">Inclusive rider fit</div>
             <div class="hero-chip">Power to explore</div>
           </div>
-          <p class="interactive-note hide-on-print">Open this on the web and click around. Several sections expand for more detail.</p>
-          <div class="metrics">
-            <article class="metric-card" tabindex="0">
-              <div class="value">&lt; 70 lbs</div>
-              <div>Weight</div>
-              <div class="metric-panel">Our lightweight seating system and all-electric frame enable one of the lightest powered adaptive trail trikes on the market.</div>
-            </article>
-            <article class="metric-card" tabindex="0">
-              <div class="value">40-80 miles</div>
-              <div>Range</div>
-              <div class="metric-panel">A high-capacity lithium-ion e-bike battery is designed to support full-day rides with room for real exploration.</div>
-            </article>
-            <article class="metric-card" tabindex="0">
-              <div class="value">$5k-$7.5k</div>
-              <div>Target Price</div>
-              <div class="metric-panel">We can reach this price point by manufacturing overseas while keeping the platform focused on practical serviceability.</div>
-            </article>
-          </div>
+          <p class="hero-note hide-on-print">Click around — several sections expand for more detail.</p>
         </div>
         <div class="hero-media">
           <div class="image-frame">
@@ -1292,142 +1119,181 @@
     <div class="scroll-cue"><span>Scroll for operational details</span><span class="scroll-dot" aria-hidden="true"></span></div>
   </section>
 
-  <section>
+  <!-- 2. NUMBERS BAND -->
+  <section class="numbers-band">
     <div class="container">
-      <h2 class="section-title">Prototype Gallery</h2>
-      <div class="gallery-stack">
-        <div class="gallery-grid-landscape">
-          <article class="gallery-card">
-            <div class="media-surface">
-              <img class="media-image" src="assets/20250813_First Tracks_Meetup_@henndogg22-113 (1).jpg" alt="Rider beside the physical KOINE prototype at a public meetup" width="8256" height="5504" />
-            </div>
-          </article>
-          <article class="gallery-card">
-            <div class="media-surface">
-              <img class="media-image" src="assets/20250813_First Tracks_Meetup_@henndogg22-119 (1).jpg" alt="Rear three-quarter view of the physical KOINE prototype" width="8256" height="5504" />
-            </div>
-          </article>
-          <article class="gallery-card">
-            <div class="media-surface">
-              <img class="media-image" src="assets/Josh_s Bike-02.jpg" alt="Low front three-quarter outdoor photo of the physical KOINE prototype" width="4287" height="2858" />
-            </div>
-          </article>
+      <div class="numbers-grid">
+        <div class="number-stat">
+          <div class="number-kicker">Weight</div>
+          <div class="number-value">&lt; 70 lbs</div>
+          <div class="number-detail">One of the lightest powered adaptive trail trikes available. Designed for single-volunteer handling.</div>
         </div>
-        <div class="gallery-grid-portrait">
-          <article class="gallery-card">
-            <div class="media-surface">
-              <img class="media-image" src="assets/100_0280 (2).JPG" alt="Rider using the physical KOINE prototype on a forest path" width="3456" height="4608" />
-            </div>
-          </article>
-          <article class="gallery-card">
-            <div class="media-surface">
-              <img class="media-image" src="assets/100_0283 (1).JPG" alt="Side profile rider photo of the physical KOINE prototype in a forest setting" width="3456" height="4608" />
-            </div>
-          </article>
+        <div class="number-stat">
+          <div class="number-kicker">Range</div>
+          <div class="number-value">40–80 mi</div>
+          <div class="number-detail">52V 20Ah lithium-ion battery supports full-day rides on a single charge.</div>
+        </div>
+        <div class="number-stat">
+          <div class="number-kicker">Initial Retail Price</div>
+          <div class="number-value">$8k</div>
+          <div class="price-target-line">
+            <span class="price-target-badge">3-yr target</span>
+            <span class="price-target-value">$5k</span>
+          </div>
+          <div class="number-detail">Manufacturing scale and continued development are expected to bring the retail price to $5,000 within three years.</div>
+          <div class="price-track-wrap">
+            <div class="price-track-labels"><span>$8k today</span><span>$5k in 3 yrs</span></div>
+            <div class="price-track"><div class="price-bar" id="price-bar"></div></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 3. GALLERY -->
   <section>
     <div class="container">
-      <h2 class="section-title">Quick Overview</h2>
-      <p class="section-lead">A high-level map of the product priorities. Each card expands for additional operational detail.</p>
-      <div class="feature-grid">
-        <article class="feature-card" tabindex="0">
-          <h3>Rider Adaptability</h3>
-          <div class="feature-panel"><ul><li>Three rider positions from upright to long-sitting.</li><li>Seat, support, and restraint points adjust for individual fit.</li><li>Focus on inclusive rider onboarding.</li></ul></div>
-        </article>
-        <article class="feature-card" tabindex="0">
-          <h3>Fleet Operation</h3>
-          <div class="feature-panel"><ul><li>Single-volunteer setup objective.</li><li>Compatible with existing transport solutions.</li><li>Fast transition between riders.</li></ul></div>
-        </article>
-        <article class="feature-card" tabindex="0">
-          <h3>Maintenance Simplicity</h3>
-          <div class="feature-panel"><ul><li>Standard bike shop service strategy.</li><li>Low custom part count.</li><li>Two core fastener sizes reduce tool management.</li></ul></div>
-        </article>
-        <article class="feature-card" tabindex="0">
-          <h3>Cost Accessibility</h3>
-          <div class="feature-panel"><ul><li>Target purchase range supports fleet adoption planning.</li><li>Low seasonal consumables target.</li><li>Early pilot feedback intended to stabilize long-term service cost.</li></ul></div>
-        </article>
-        <article class="feature-card" tabindex="0">
-          <h3>Trail Performance</h3>
-          <div class="feature-panel"><ul><li>Tadpole stance for predictable stability.</li><li>Rigid frame prioritizes reliability.</li><li>Hub motor supports climbing and assist needs.</li></ul></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 class="section-title">Design Overview</h2>
-      <p class="section-lead">Hover the system labels to inspect component intent and how the architecture balances trail feel with low-maintenance fleet use.</p>
-      <div class="diagram-wrap">
-        <div class="diagram">
-          <div class="media-surface">
-            <img class="media-image" src="assets/trike_diagram_profile.png" alt="Profile diagram of the adaptive trail trike" width="702" height="496" />
-          </div>
-          <div class="callout c1" tabindex="0">
-            <span class="callout-label">Front Wheel Pair</span>
-            <span class="callout-copy">Provides steering stability and a predictable front contact patch on varied trail surfaces.</span>
-          </div>
-          <div class="callout c2" tabindex="0">
-            <span class="callout-label">Fat Rear Tire</span>
-            <span class="callout-copy">Adds passive shock absorption and rear traction where the frame stays rigid for durability.</span>
-          </div>
-          <div class="callout c3" tabindex="0">
-            <span class="callout-label">Rear Hub Motor</span>
-            <span class="callout-copy">Delivers electric propulsion from the rear wheel to support climbing and longer assisted outings.</span>
-          </div>
-          <div class="callout c4" tabindex="0">
-            <span class="callout-label">Rigid Frame</span>
-            <span class="callout-copy">Keeps the architecture simpler to maintain, easier to service, and more durable for fleet use.</span>
-          </div>
+      <div class="section-kicker">In the Field</div>
+      <h2>Prototype Gallery</h2>
+      <div class="gallery-hero-grid">
+        <div class="gallery-card gallery-hero-main">
+          <img src="assets/Josh_s Bike-02.jpg" alt="Low front three-quarter outdoor photo of the physical KOINE prototype" width="4287" height="2858" />
         </div>
-        <div class="design-callout-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Component</th>
-                <th>Function</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Front Wheel Pair</td><td>Provides steering stability and a predictable front contact patch on varied trail surfaces.</td></tr>
-              <tr><td>Fat Rear Tire</td><td>Adds passive shock absorption and rear traction where the frame stays rigid for durability.</td></tr>
-              <tr><td>Rear Hub Motor</td><td>Delivers electric propulsion from the rear wheel to support climbing and longer assisted outings.</td></tr>
-              <tr><td>Rigid Frame</td><td>Keeps the architecture simpler to maintain, easier to service, and more durable for fleet use.</td></tr>
-            </tbody>
-          </table>
+        <div class="gallery-card">
+          <img src="assets/20250813_First Tracks_Meetup_@henndogg22-113 (1).jpg" alt="Rider beside the physical KOINE prototype at a public meetup" width="8256" height="5504" />
+        </div>
+        <div class="gallery-card">
+          <img src="assets/20250813_First Tracks_Meetup_@henndogg22-119 (1).jpg" alt="Rear three-quarter view of the physical KOINE prototype" width="8256" height="5504" />
+        </div>
+      </div>
+      <div class="gallery-portrait-strip">
+        <div class="gallery-card">
+          <img src="assets/100_0280 (2).JPG" alt="Rider using the physical KOINE prototype on a forest path" width="3456" height="4608" />
+        </div>
+        <div class="gallery-card">
+          <img src="assets/100_0283 (1).JPG" alt="Side profile rider photo of the physical KOINE prototype in a forest setting" width="3456" height="4608" />
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 4. PRODUCT (Overview + Diagram unified) -->
   <section>
     <div class="container">
-      <h2 class="section-title">Rider Adaptability</h2>
-      <p class="section-lead">Use the position controls to move between supported rider setups and review the fixed adjustment points below.</p>
-      <div class="config-nav" role="tablist" aria-label="Rider positions">
-        <button class="config-tab active" type="button" data-position="1" role="tab" aria-selected="true"><span class="config-tab-index">1.</span><span class="config-tab-label">90&deg; Seated</span></button>
-        <button class="config-tab" type="button" data-position="2" role="tab" aria-selected="false"><span class="config-tab-index">2.</span><span class="config-tab-label">45&deg; Forward</span></button>
-        <button class="config-tab" type="button" data-position="3" role="tab" aria-selected="false"><span class="config-tab-index">3.</span><span class="config-tab-label">Long-Sitting</span></button>
-      </div>
-      <div class="config-display">
-        <div class="config-diagram">
-          <div class="media-surface">
-            <img id="configImage" class="media-image" src="assets/position 1.png" alt="Position 1 rider seating configuration" width="702" height="496" />
-          </div>
+      <div class="section-kicker">Product</div>
+      <h2>Design Overview</h2>
+      <p class="section-lead">Core product priorities and component intent. Click a card to expand, hover the diagram to inspect.</p>
+      <div class="product-grid">
+        <div class="feature-grid-tight">
+          <article class="feature-card" tabindex="0">
+            <h3>Rider Adaptability</h3>
+            <div class="feature-panel"><ul><li>Three rider positions from upright to long-sitting.</li><li>Seat, support, and restraint points adjust for individual fit.</li><li>Focus on inclusive rider onboarding.</li></ul></div>
+          </article>
+          <article class="feature-card" tabindex="0">
+            <h3>Fleet Operation</h3>
+            <div class="feature-panel"><ul><li>Single-volunteer setup objective.</li><li>Compatible with existing transport solutions.</li><li>Fast transition between riders.</li></ul></div>
+          </article>
+          <article class="feature-card" tabindex="0">
+            <h3>Maintenance Simplicity</h3>
+            <div class="feature-panel"><ul><li>Standard bike shop service strategy.</li><li>Low custom part count.</li><li>Two core fastener sizes reduce tool management.</li></ul></div>
+          </article>
+          <article class="feature-card" tabindex="0">
+            <h3>Cost Accessibility</h3>
+            <div class="feature-panel"><ul><li>Target purchase range supports fleet adoption planning.</li><li>Low seasonal consumables target.</li><li>Early pilot feedback intended to stabilize long-term service cost.</li></ul></div>
+          </article>
+          <article class="feature-card" tabindex="0">
+            <h3>Trail Performance</h3>
+            <div class="feature-panel"><ul><li>Tadpole stance for predictable stability.</li><li>Rigid frame prioritizes reliability.</li><li>Hub motor supports climbing and assist needs.</li></ul></div>
+          </article>
         </div>
-        <div class="config-copy">
-          <h3 id="configTitle">90-degree seated with foot pegs</h3>
-          <ul id="configBullets" class="config-bullets"></ul>
-        </div>
-      </div>
-      <div class="config-support">
         <div>
-          <strong>Fixed Adjustment Points</strong>
-          <h3 style="margin-top:1rem;">Static Adjustment Points</h3>
+          <div class="diagram-wrap">
+            <div class="diagram-label">Hover labels to inspect component intent</div>
+            <div class="diagram">
+              <div class="media-surface">
+                <img class="media-image" src="assets/trike_diagram_photo.png" alt="Profile photo of the adaptive trail trike with component callouts" width="702" height="496" />
+              </div>
+              <div class="callout c1" tabindex="0">
+                <span class="callout-label">Front Wheel Pair</span>
+                <span class="callout-copy">Provides steering stability and a predictable front contact patch on varied trail surfaces.</span>
+              </div>
+              <div class="callout c2" tabindex="0">
+                <span class="callout-label">Fat Rear Tire</span>
+                <span class="callout-copy">Adds passive shock absorption and rear traction where the frame stays rigid for durability.</span>
+              </div>
+              <div class="callout c3" tabindex="0">
+                <span class="callout-label">Rear Hub Motor</span>
+                <span class="callout-copy">Delivers electric propulsion from the rear wheel to support climbing and longer assisted outings.</span>
+              </div>
+              <div class="callout c4" tabindex="0">
+                <span class="callout-label">Rigid Frame</span>
+                <span class="callout-copy">Keeps the architecture simpler to maintain, easier to service, and more durable for fleet use.</span>
+              </div>
+            </div>
+            <div class="design-callout-table">
+              <table>
+                <thead><tr><th>Component</th><th>Function</th></tr></thead>
+                <tbody>
+                  <tr><td>Front Wheel Pair</td><td>Provides steering stability and a predictable front contact patch on varied trail surfaces.</td></tr>
+                  <tr><td>Fat Rear Tire</td><td>Adds passive shock absorption and rear traction where the frame stays rigid for durability.</td></tr>
+                  <tr><td>Rear Hub Motor</td><td>Delivers electric propulsion from the rear wheel to support climbing and longer assisted outings.</td></tr>
+                  <tr><td>Rigid Frame</td><td>Keeps the architecture simpler to maintain, easier to service, and more durable for fleet use.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. RIDER ADAPTABILITY -->
+  <section>
+    <div class="container">
+      <div class="section-kicker">Rider Fit</div>
+      <h2>Rider Adaptability</h2>
+      <p class="section-lead">Select a position to explore the configuration. All fit points adjust to support a wide range of riders and disabilities.</p>
+
+      <div class="config-nav" role="tablist" aria-label="Rider positions">
+        <button class="config-tab active" type="button" data-position="1" role="tab" aria-selected="true"><span class="config-tab-index">1.</span> 90&deg; Seated</button>
+        <button class="config-tab" type="button" data-position="2" role="tab" aria-selected="false"><span class="config-tab-index">2.</span> 45&deg; Forward</button>
+        <button class="config-tab" type="button" data-position="3" role="tab" aria-selected="false"><span class="config-tab-index">3.</span> Long-Sitting</button>
+      </div>
+
+      <div class="position-selector" role="tablist" aria-label="Rider positions">
+        <div class="position-thumb active" tabindex="0" role="tab" aria-selected="true" data-position="1">
+          <div class="position-thumb-img">
+            <img src="assets/position 1.png" alt="Position 1 — 90 degree seated" width="702" height="496" />
+          </div>
+          <div class="position-thumb-label">90° Seated</div>
+        </div>
+        <div class="position-thumb" tabindex="0" role="tab" aria-selected="false" data-position="2">
+          <div class="position-thumb-img">
+            <img src="assets/position 2.png" alt="Position 2 — 45 degree forward" width="702" height="496" />
+          </div>
+          <div class="position-thumb-label">45° Forward</div>
+        </div>
+        <div class="position-thumb" tabindex="0" role="tab" aria-selected="false" data-position="3">
+          <div class="position-thumb-img">
+            <img src="assets/position 3.png" alt="Position 3 — long-sitting" width="702" height="496" />
+          </div>
+          <div class="position-thumb-label">Long-Sitting</div>
+        </div>
+      </div>
+
+      <div class="position-detail">
+        <div class="position-detail-img">
+          <img id="posDetailImage" src="assets/position 1.png" alt="Active rider position" width="702" height="496" />
+        </div>
+        <div class="position-detail-copy">
+          <h3 id="posDetailTitle">90-degree seated with foot pegs</h3>
+          <ul id="posDetailBullets" class="config-bullets"></ul>
+        </div>
+      </div>
+
+      <div class="adjust-grid">
+        <div class="adjust-box">
+          <h3>Static Adjustment Points</h3>
           <ul>
             <li>Backrest height (removable)</li>
             <li>Seat dump</li>
@@ -1436,174 +1302,208 @@
             <li>Seat fore/aft</li>
             <li>Seat height</li>
           </ul>
-          <div class="limits">
-            <div class="pill">Max rider height: 6'2"</div>
-            <div class="pill">Max rider weight: 220 lbs</div>
-            <div class="pill">Volunteer adjustment: 20-30 min</div>
+        </div>
+        <div class="adjust-box">
+          <h3>Rider Limits</h3>
+          <div>
+            <span class="pill">Max height: 6'2"</span>
+            <span class="pill">Max weight: 220 lbs</span>
+            <span class="pill">Volunteer adjustment: 20–30 min</span>
           </div>
         </div>
       </div>
+
       <div class="print-config-list">
         <div class="print-config-card">
           <div class="pill">Position 1</div>
-          <div class="media-surface">
-            <img class="media-image" src="assets/position 1.png" alt="Position 1 rider seating configuration" width="702" height="496" />
-          </div>
+          <div class="media-surface" style="margin-top:0.85rem;"><img src="assets/position 1.png" alt="Position 1" width="702" height="496" style="display:block;width:100%;height:auto;" /></div>
           <h3>90-degree seated with foot pegs</h3>
-          <ul>
-            <li>Upright seated posture for stable trunk support.</li>
-            <li>Foot pegs position lower legs in controlled neutral placement.</li>
-            <li>Uses stock bike pedals for personal user fit preference (straps, studs, etc).</li>
-          </ul>
+          <ul><li>Upright seated posture for stable trunk support.</li><li>Foot pegs position lower legs in controlled neutral placement.</li><li>Uses stock bike pedals for personal user fit preference (straps, studs, etc).</li></ul>
         </div>
         <div class="print-config-card">
           <div class="pill">Position 2</div>
-          <div class="media-surface">
-            <img class="media-image" src="assets/position 2.png" alt="Position 2 rider seating configuration" width="702" height="496" />
-          </div>
+          <div class="media-surface" style="margin-top:0.85rem;"><img src="assets/position 2.png" alt="Position 2" width="702" height="496" style="display:block;width:100%;height:auto;" /></div>
           <h3>45-degree forward position with foot pads</h3>
-          <ul>
-            <li>Useful for shorter legs or for riders who prefer their knees closer to their chest for stabilization.</li>
-            <li>Foot pads support broader lower-limb contact area.</li>
-          </ul>
+          <ul><li>Useful for shorter legs or for riders who prefer their knees closer to their chest for stabilization.</li><li>Foot pads support broader lower-limb contact area.</li></ul>
         </div>
         <div class="print-config-card">
           <div class="pill">Position 3</div>
-          <div class="media-surface">
-            <img class="media-image" src="assets/position 3.png" alt="Position 3 rider seating configuration" width="702" height="496" />
-          </div>
+          <div class="media-surface" style="margin-top:0.85rem;"><img src="assets/position 3.png" alt="Position 3" width="702" height="496" style="display:block;width:100%;height:auto;" /></div>
           <h3>Long-sitting configuration with adjustable leg supports</h3>
-          <ul>
-            <li>Great for riders already used to standard adaptive off-road seating interfaces.</li>
-            <li>Leg supports provide extended lower-limb guidance.</li>
-            <li>Wide adjustability accommodates anthropometric diversity.</li>
-          </ul>
+          <ul><li>Great for riders already used to standard adaptive off-road seating interfaces.</li><li>Leg supports provide extended lower-limb guidance.</li><li>Wide adjustability accommodates anthropometric diversity.</li></ul>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 6. FLEET OPERATIONS -->
   <section>
     <div class="container">
-      <div class="paired-grid">
-        <div>
-          <h2 class="section-title">Program Operations</h2>
-          <p class="section-lead">Operational constraints are presented as expandable tiles so volunteer and fleet details remain accessible without overloading the initial read.</p>
-          <div class="operations-grid">
-            <article class="tile"><h3>Bike Weight</h3><p><strong>&lt; 70 lbs</strong></p><div class="tile-panel">Allows one volunteer to reposition bike for staging and short loading tasks.</div></article>
-            <article class="tile"><h3>Unload Time</h3><p><strong>&lt; 5 minutes</strong></p><div class="tile-panel">Designed for quick unloading from common racks and trailers with minimal handling complexity.</div></article>
-            <article class="tile"><h3>Setup Time</h3><p><strong>Typically &lt; 10 minutes</strong></p><div class="tile-panel">Typical setup after rider is selected and baseline seat settings are known.</div></article>
-            <article class="tile"><h3>Transport Compatibility</h3><p><strong>Fits existing transport solutions</strong></p><div class="tile-panel">No dedicated trailer architecture planned for baseline operations.</div></article>
-            <article class="tile"><h3>Volunteer Requirement</h3><p><strong>Single volunteer handling</strong></p><div class="tile-panel">Routine movement and setup tasks are intended to be handled by one trained volunteer.</div></article>
-          </div>
+      <div class="section-kicker">Operations</div>
+      <h2>Program Operations &amp; Maintenance</h2>
+      <p class="section-lead">Operational targets are designed around real volunteer workflows. Click a stat for more detail.</p>
+
+      <div class="ops-stats-row">
+        <div class="ops-stat" tabindex="0">
+          <div class="ops-stat-value">&lt; 70 lbs</div>
+          <div class="ops-stat-label">Bike Weight</div>
+          <div class="tile-panel">Allows one volunteer to reposition the bike for staging and short loading tasks.</div>
         </div>
-        <div>
-          <h2 class="section-title">Maintenance &amp; Durability</h2>
-          <details open>
-            <summary>Frame Materials</summary>
-            <ul><li>4130 chromoly steel</li><li>Aluminum components</li></ul>
-          </details>
-          <details>
-            <summary>Component Strategy</summary>
-            <ul><li>Standard bicycle components wherever possible</li><li>Minimal custom components</li><li>All serviceable via normal bike shops</li></ul>
-          </details>
-          <details>
-            <summary>Fastener Standardization</summary>
-            <p>Only two fastener sizes: <strong>M5</strong> and <strong>M8</strong>. Shared lengths allow easy interchange.</p>
-          </details>
-          <details>
-            <summary>Routine Maintenance</summary>
-            <ul><li>Pre-ride inspection</li><li>Seasonal service</li><li>Estimated seasonal consumables: <strong>&lt; $50</strong></li></ul>
-          </details>
+        <div class="ops-stat" tabindex="0">
+          <div class="ops-stat-value">&lt; 5 min</div>
+          <div class="ops-stat-label">Unload Time</div>
+          <div class="tile-panel">Designed for quick unloading from common racks and trailers with minimal handling complexity.</div>
         </div>
+        <div class="ops-stat" tabindex="0">
+          <div class="ops-stat-value">&lt; 10 min</div>
+          <div class="ops-stat-label">Setup Time</div>
+          <div class="tile-panel">Typical setup after rider is selected and baseline seat settings are known.</div>
+        </div>
+        <div class="ops-stat" tabindex="0">
+          <div class="ops-stat-value">Existing</div>
+          <div class="ops-stat-label">Transport</div>
+          <div class="tile-panel">Compatible with existing transport solutions. No dedicated trailer architecture planned for baseline operations.</div>
+        </div>
+        <div class="ops-stat" tabindex="0">
+          <div class="ops-stat-value">1</div>
+          <div class="ops-stat-label">Volunteer</div>
+          <div class="tile-panel">Routine movement and setup tasks are intended to be handled by one trained volunteer.</div>
+        </div>
+      </div>
+
+      <div class="maintenance-subhead">Maintenance &amp; Durability</div>
+      <div class="maintenance-grid">
+        <details open>
+          <summary>Frame Materials</summary>
+          <ul><li>4130 chromoly steel</li><li>Aluminum components</li></ul>
+        </details>
+        <details>
+          <summary>Component Strategy</summary>
+          <ul><li>Standard bicycle components wherever possible</li><li>Minimal custom components</li><li>All serviceable via normal bike shops</li></ul>
+        </details>
+        <details>
+          <summary>Fastener Standardization</summary>
+          <p>Only two fastener sizes: <strong>M5</strong> and <strong>M8</strong>. Shared lengths allow easy interchange.</p>
+        </details>
+        <details>
+          <summary>Routine Maintenance</summary>
+          <ul><li>Pre-ride inspection</li><li>Seasonal service</li><li>Estimated seasonal consumables: <strong>&lt; $50</strong></li></ul>
+        </details>
       </div>
     </div>
   </section>
 
+  <!-- 7. SPECS + COMPARISON -->
   <section>
     <div class="container">
-      <h2 class="section-title">Performance Specifications</h2>
-      <table class="spec-table">
-        <tbody>
-          <tr><td>Configuration</td><td>Tadpole trike</td></tr>
-          <tr><td>Motor</td><td>Bafang geared motor or Grin MAX45 Fat Hub Motor</td></tr>
-          <tr><td>Battery</td><td>52V 50-AMP 20 Ah battery</td></tr>
-          <tr><td>Brakes</td><td>Tektro Auriga Twin hydraulic disk brakes</td></tr>
-          <tr><td>Max torque</td><td>95 Nm</td></tr>
-          <tr><td>Top speed</td><td>20 mph</td></tr>
-          <tr><td>Range</td><td>40-80 miles</td></tr>
-          <tr><td>Max grade</td><td>20%</td></tr>
-          <tr><td>Types of trails</td><td>Fire roads, double track, some hiking trails, gravel trails, paved bike paths</td></tr>
-          <tr><td>Wheels</td><td>Front: 26 x 2.4; Rear: 26 x 4.5 fat tire</td></tr>
-          <tr><td>Tube configuration</td><td>Tubeless</td></tr>
-          <tr><td>Frame architecture</td><td>Rigid frame</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2 class="section-title">Market Positioning Comparison</h2>
-      <div class="compare-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr><th>Dimension</th><th>Koine RAINIER</th><th>Other AMTBs</th><th>Not A Wheelchair - The Rig</th></tr>
-          </thead>
+      <div class="section-kicker">Technical Reference</div>
+      <h2>Specifications</h2>
+      <div class="spec-tabs-nav" role="tablist">
+        <button class="spec-tab-btn active" type="button" data-panel="specs" role="tab" aria-selected="true">Performance Specs</button>
+        <button class="spec-tab-btn" type="button" data-panel="compare" role="tab" aria-selected="false">Market Positioning</button>
+      </div>
+      <div id="panel-specs" class="spec-panel active">
+        <table class="spec-table">
           <tbody>
-            <tr data-similar="false"><td>Best Fit</td><td>Programs prioritizing accessible trail riding, easy transfers, simple setup, durability, and a realistic price point</td><td>Programs seeking premium off-road capability, higher-end components, and specialized performance features</td><td>Riders prioritizing affordable off-road mobility with a strong transport convenience story</td></tr>
-            <tr data-similar="false"><td>Transfer Ease</td><td>High seating position enables easy transfers, similar to daily chairs, with three rider positions and adjustable support points for simpler onboarding.</td><td>Often optimized more around performance or a specific rider profile than easy assisted transfer.</td><td>Accessible fit and transfers, but not designed around the same level of supported rider positioning and transfer flexibility.</td></tr>
-            <tr data-similar="false"><td>Adaptive Support</td><td>Built for higher-support use cases with fit-adjustable restraint and seating points.</td><td>Can be excellent for specific riders, but usually at higher complexity and cost.</td><td>Broader mobility-device framing, but less focused on high-support adaptive seating flexibility.</td></tr>
-            <tr data-similar="false"><td>Price Position</td><td>$5k-$7.5k target</td><td>Typically $13k+ and often higher with premium controls, suspension, and customization</td><td>Starting at $5,099</td></tr>
-            <tr data-similar="false"><td>Trail Positioning</td><td>Adaptive trail trike built to balance rider support with practical serviceability.</td><td>Focused on top-end adaptive MTB performance and premium ride systems.</td><td>Affordable off-road mobility device with lighter emphasis on supported adaptive trail fit.</td></tr>
-            <tr data-similar="false"><td>Durability / Simplicity</td><td>Fixed frame and minimal component count with standardized fasteners enable long service lifespans and easy maintenance and repair.</td><td>Can be durable, but premium systems and customization usually raise maintenance and service burden.</td><td>Bike-part maintenance simplicity is part of the appeal, but the product is less centered on program-ready adaptive support.</td></tr>
-            <tr data-similar="false"><td>Program Value</td><td>Designed to help programs serve more riders with easier transfers, simpler volunteer workflows, and lower ongoing operating complexity.</td><td>Often better suited for premium individual use cases than repeatable multi-rider program operations.</td><td>Strong affordability story, but less aligned with higher-support adaptive program use.</td></tr>
+            <tr><td>Configuration</td><td>Tadpole trike</td></tr>
+            <tr><td>Motor</td><td>Bafang geared motor or Grin MAX45 Fat Hub Motor</td></tr>
+            <tr><td>Battery</td><td>52V 50-AMP 20 Ah battery</td></tr>
+            <tr><td>Brakes</td><td>Tektro Auriga Twin hydraulic disk brakes</td></tr>
+            <tr><td>Max torque</td><td>95 Nm</td></tr>
+            <tr><td>Top speed</td><td>20 mph</td></tr>
+            <tr><td>Range</td><td>40–80 miles</td></tr>
+            <tr><td>Max grade</td><td>20%</td></tr>
+            <tr><td>Types of trails</td><td>Fire roads, double track, some hiking trails, gravel trails, paved bike paths</td></tr>
+            <tr><td>Wheels</td><td>Front: 26 x 2.4; Rear: 26 x 4.5 fat tire</td></tr>
+            <tr><td>Tube configuration</td><td>Tubeless</td></tr>
+            <tr><td>Frame architecture</td><td>Rigid frame</td></tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="paired-grid">
-        <div>
-          <h2 class="section-title">Prototype Status</h2>
-          <div class="status-panel">
-            <ul class="status-list">
-              <li style="--status-dot:#4c78df;"><strong>Prototype Generation: Gen-1</strong></li>
-              <li style="--status-dot:#48b75d;"><strong>Field Testing Completed:</strong> California, Utah, Washington, British Columbia</li>
-              <li style="--status-dot:#d7a401;"><strong>Current Validation Focus:</strong> Testing across broader disability populations</li>
-              <li style="--status-dot:#9a5de1;"><strong>Production Timeline Focus:</strong> ~1 year estimated; early demo units produced domestically</li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div class="pilot-panel">
-            <h2>Pilot Program Opportunity</h2>
-            <p>We are seeking adaptive sports programs that want to expand trail access with a platform built for easier transfers, simpler volunteer support, and practical long-term service.</p>
-            <div class="pilot-inner">
-              <strong>Pilot programs will help validate:</strong>
-              <ul>
-                <li>Transfer ease across a wider range of riders</li>
-                <li>Volunteer onboarding and day-of ride workflows</li>
-                <li>Program storage, transport, and fleet integration</li>
-                <li>Service intervals, wear points, and long-term maintenance needs</li>
-              </ul>
-            </div>
-            <p>Participating programs receive early access, direct input into design refinement, and a meaningful voice in how RAINIER is shaped for real program use.</p>
-            <p>Ideal pilot partners are programs serving diverse rider needs, running repeat volunteer operations, and looking for a bike that can help more participants get on trail with less setup friction.</p>
-          </div>
+      <div id="panel-compare" class="spec-panel">
+        <div class="compare-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr><th>Dimension</th><th>Koine RAINIER</th><th>Other AMTBs</th><th>Not A Wheelchair — The Rig</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Best Fit</td><td>Programs prioritizing accessible trail riding, easy transfers, simple setup, durability, and a realistic price point</td><td>Programs seeking premium off-road capability, higher-end components, and specialized performance features</td><td>Riders prioritizing affordable off-road mobility with a strong transport convenience story</td></tr>
+              <tr><td>Transfer Ease</td><td>High seating position enables easy transfers, similar to daily chairs, with three rider positions and adjustable support points for simpler onboarding.</td><td>Often optimized more around performance or a specific rider profile than easy assisted transfer.</td><td>Accessible fit and transfers, but not designed around the same level of supported rider positioning and transfer flexibility.</td></tr>
+              <tr><td>Adaptive Support</td><td>Built for higher-support use cases with fit-adjustable restraint and seating points.</td><td>Can be excellent for specific riders, but usually at higher complexity and cost.</td><td>Broader mobility-device framing, but less focused on high-support adaptive seating flexibility.</td></tr>
+              <tr><td>Price Position</td><td>$8k initial retail; 3-year target $5k</td><td>Typically $13k+ and often higher with premium controls, suspension, and customization</td><td>Starting at $5,099</td></tr>
+              <tr><td>Trail Positioning</td><td>Adaptive trail trike built to balance rider support with practical serviceability.</td><td>Focused on top-end adaptive MTB performance and premium ride systems.</td><td>Affordable off-road mobility device with lighter emphasis on supported adaptive trail fit.</td></tr>
+              <tr><td>Durability / Simplicity</td><td>Fixed frame and minimal component count with standardized fasteners enable long service lifespans and easy maintenance and repair.</td><td>Can be durable, but premium systems and customization usually raise maintenance and service burden.</td><td>Bike-part maintenance simplicity is part of the appeal, but the product is less centered on program-ready adaptive support.</td></tr>
+              <tr><td>Program Value</td><td>Designed to help programs serve more riders with easier transfers, simpler volunteer workflows, and lower ongoing operating complexity.</td><td>Often better suited for premium individual use cases than repeatable multi-rider program operations.</td><td>Strong affordability story, but less aligned with higher-support adaptive program use.</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
-  <section>
+  <!-- 8. STATUS + PILOT -->
+  <section class="status-pilot">
+    <div class="container status-pilot-top">
+      <div class="status-dark-kicker">Development Status</div>
+      <h2>Where We Are &amp; How to Join</h2>
+      <div class="status-timeline">
+        <div class="status-item">
+          <div class="status-dot" style="--dot-color:#4c78df;"></div>
+          <strong>Prototype Generation: Gen-1</strong>
+          <span>First full prototype completed and in active testing.</span>
+        </div>
+        <div class="status-item">
+          <div class="status-dot" style="--dot-color:#48b75d;"></div>
+          <strong>Field Testing Complete</strong>
+          <span>Whistler (BC), Bentonville/Ozarks (AR), Tiger Mountain (WA)</span>
+        </div>
+        <div class="status-item">
+          <div class="status-dot" style="--dot-color:#d7a401;"></div>
+          <strong>Current Validation Focus</strong>
+          <span>Testing across broader disability populations.</span>
+        </div>
+        <div class="status-item">
+          <div class="status-dot" style="--dot-color:#9a5de1;"></div>
+          <strong>Production Timeline: ~1 Year</strong>
+          <span>Early demo units produced domestically.</span>
+        </div>
+      </div>
+    </div>
+    <div class="pilot-full">
+      <div class="container">
+        <div class="pilot-full-inner">
+          <div>
+            <h2>Pilot Program Partnership</h2>
+            <p>RAINIER is designed to help adaptive programs serve more riders — with easier transfers, simpler volunteer workflows, and a price point that makes fleet adoption realistic. We're selecting 3–5 pilot partners to receive early units and shape how the platform develops.</p>
+            <div class="pilot-checklist">
+              <strong>Pilot partners receive:</strong>
+              <ul>
+                <li>Priority allocation in the first production run</li>
+                <li>Direct input into design refinement based on your program's rider population and operational needs</li>
+                <li>A dedicated point of contact through delivery and early deployment</li>
+              </ul>
+            </div>
+            <div class="pilot-loi">
+              <div class="pilot-loi-heading">What signing an LOI means</div>
+              <p>Our Letter of Intent is non-binding. It expresses mutual interest in moving forward and opens a direct conversation about delivery timing, quantity, and program fit. Either party can withdraw at any time before a final agreement is signed — no penalties, no obligations. If RAINIER fits your program, this is the lowest-friction way to stay at the front of the line.</p>
+            </div>
+            <div class="pilot-ctas">
+              <a href="#" class="pilot-btn pilot-btn-primary">Download the LOI</a>
+              <a href="mailto:info@koineadaptive.com" class="pilot-btn pilot-btn-secondary">Get in Touch</a>
+            </div>
+          </div>
+          <div><!-- spacer column --></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTACT -->
+  <section class="contact-section">
     <div class="container">
-      <h2 class="section-title">Contact</h2>
+      <div class="section-kicker">Get in Touch</div>
+      <h2>Contact</h2>
       <div class="contact-grid">
-        <div class="contact-card"><strong>Name</strong><p>Joshua Anderson</p></div>
         <div class="contact-card"><strong>Organization</strong><p>Koine Adaptive</p></div>
         <div class="contact-card"><strong>Email</strong><p>info@koineadaptive.com</p></div>
         <div class="contact-card"><strong>Website</strong><p>[WIP]</p></div>
@@ -1612,34 +1512,39 @@
   </section>
 
   <script>
-    document.querySelectorAll('.feature-card, .tile, .metric-card').forEach((card) => {
+    // Feature cards
+    document.querySelectorAll('.feature-card').forEach((card) => {
       const toggle = () => card.classList.toggle('active');
       card.addEventListener('click', toggle);
       card.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggle();
-        }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
       });
     });
 
-    const configs = {
+    // Ops stats
+    document.querySelectorAll('.ops-stat').forEach((stat) => {
+      const toggle = () => stat.classList.toggle('active');
+      stat.addEventListener('click', toggle);
+      stat.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+
+    // Position selector
+    const posConfigs = {
       1: {
-        label: 'Position 1',
         title: '90-degree seated with foot pegs',
         image: 'assets/position 1.png',
         alt: 'Position 1 rider seating configuration',
         bullets: ['Upright seated posture for stable trunk support.', 'Foot pegs position lower legs in controlled neutral placement.', 'Uses stock bike pedals for personal user fit preference (straps, studs, etc).']
       },
       2: {
-        label: 'Position 2',
         title: '45-degree forward position with foot pads',
         image: 'assets/position 2.png',
         alt: 'Position 2 rider seating configuration',
         bullets: ['Useful for shorter legs or for riders who prefer their knees closer to their chest for stabilization.', 'Foot pads support broader lower-limb contact area.']
       },
       3: {
-        label: 'Position 3',
         title: 'Long-sitting configuration with adjustable leg supports',
         image: 'assets/position 3.png',
         alt: 'Position 3 rider seating configuration',
@@ -1647,111 +1552,111 @@
       }
     };
 
-    const configTabs = Array.from(document.querySelectorAll('.config-tab'));
-    const title = document.getElementById('configTitle');
-    const bullets = document.getElementById('configBullets');
-    const configImage = document.getElementById('configImage');
-    const expandAllButton = document.getElementById('expandAllButton');
-    const cards = Array.from(document.querySelectorAll('.feature-card, .tile, .metric-card'));
-    const detailBlocks = Array.from(document.querySelectorAll('details'));
-    const screenshotShortcut = {
-      key: 'D',
-      shiftKey: true,
-      altKey: true
-    };
+    const posDetailTitle = document.getElementById('posDetailTitle');
+    const posDetailBullets = document.getElementById('posDetailBullets');
+    const posDetailImage = document.getElementById('posDetailImage');
 
-    function renderConfig(position) {
-      const cfg = configs[position];
-      title.textContent = cfg.title;
-      configImage.src = cfg.image;
-      configImage.alt = cfg.alt;
-      bullets.innerHTML = cfg.bullets.map((item) => `<li>${item}</li>`).join('');
-      configTabs.forEach((tab) => {
-        const isActive = tab.dataset.position === String(position);
-        tab.classList.toggle('active', isActive);
-        tab.setAttribute('aria-selected', String(isActive));
+    function renderPosition(pos) {
+      const cfg = posConfigs[pos];
+      posDetailTitle.textContent = cfg.title;
+      posDetailImage.src = cfg.image;
+      posDetailImage.alt = cfg.alt;
+      posDetailBullets.innerHTML = cfg.bullets.map(b => `<li>${b}</li>`).join('');
+      document.querySelectorAll('.position-thumb, .config-tab').forEach((el) => {
+        const isActive = el.dataset.position === String(pos);
+        el.classList.toggle('active', isActive);
+        el.setAttribute('aria-selected', String(isActive));
       });
     }
 
-    configTabs.forEach((tab) => {
-      tab.addEventListener('click', () => renderConfig(tab.dataset.position));
+    document.querySelectorAll('.position-thumb, .config-tab').forEach((el) => {
+      el.addEventListener('click', () => renderPosition(el.dataset.position));
+      el.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); renderPosition(el.dataset.position); }
+      });
+    });
+    renderPosition(1);
+
+    // Spec tabs
+    document.querySelectorAll('.spec-tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const panelId = btn.dataset.panel;
+        document.querySelectorAll('.spec-tab-btn').forEach(b => {
+          b.classList.toggle('active', b === btn);
+          b.setAttribute('aria-selected', String(b === btn));
+        });
+        document.querySelectorAll('.spec-panel').forEach(p => {
+          p.classList.toggle('active', p.id === 'panel-' + panelId);
+        });
+      });
     });
 
-    renderConfig(1);
+    // Expand all
+    const expandAllButton = document.getElementById('expandAllButton');
+    const featureCards = Array.from(document.querySelectorAll('.feature-card'));
+    const opsStats = Array.from(document.querySelectorAll('.ops-stat'));
+    const detailBlocks = Array.from(document.querySelectorAll('details'));
 
-    function syncExpandAllButton() {
-      if (document.body.classList.contains('screenshot-mode')) {
-        return;
-      }
-
-      const allCardsOpen = cards.every((card) => card.classList.contains('active'));
-      const allDetailsOpen = detailBlocks.every((block) => block.open);
-      const allOpen = allCardsOpen && allDetailsOpen;
+    function syncExpandAll() {
+      if (document.body.classList.contains('screenshot-mode')) return;
+      const allOpen = featureCards.every(c => c.classList.contains('active'))
+        && opsStats.every(s => s.classList.contains('active'))
+        && detailBlocks.every(d => d.open);
       expandAllButton.textContent = allOpen ? 'Collapse All Details' : 'Open All Details';
       expandAllButton.setAttribute('aria-pressed', String(allOpen));
     }
 
     function setExpandedState(isExpanded) {
-      cards.forEach((card) => {
-        card.classList.toggle('active', isExpanded);
-      });
-
-      detailBlocks.forEach((block) => {
-        block.open = isExpanded;
-      });
+      featureCards.forEach(c => c.classList.toggle('active', isExpanded));
+      opsStats.forEach(s => s.classList.toggle('active', isExpanded));
+      detailBlocks.forEach(d => { d.open = isExpanded; });
     }
 
     function setScreenshotMode(isEnabled) {
       document.body.classList.toggle('screenshot-mode', isEnabled);
       setExpandedState(isEnabled);
-      if (!isEnabled) {
-        syncExpandAllButton();
-      }
+      if (!isEnabled) syncExpandAll();
     }
 
     expandAllButton.addEventListener('click', () => {
-      const allOpen = cards.every((card) => card.classList.contains('active')) && detailBlocks.every((block) => block.open);
+      const allOpen = featureCards.every(c => c.classList.contains('active'))
+        && opsStats.every(s => s.classList.contains('active'))
+        && detailBlocks.every(d => d.open);
       setExpandedState(!allOpen);
-      syncExpandAllButton();
+      syncExpandAll();
     });
 
-    cards.forEach((card) => {
-      card.addEventListener('click', syncExpandAllButton);
-      card.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          requestAnimationFrame(syncExpandAllButton);
-        }
-      });
-    });
-
-    detailBlocks.forEach((block) => {
-      block.addEventListener('toggle', syncExpandAllButton);
-    });
+    [...featureCards, ...opsStats].forEach(el => el.addEventListener('click', syncExpandAll));
+    detailBlocks.forEach(d => d.addEventListener('toggle', syncExpandAll));
 
     document.addEventListener('keydown', (event) => {
-      if (
-        event.key.toUpperCase() !== screenshotShortcut.key ||
-        event.shiftKey !== screenshotShortcut.shiftKey ||
-        event.altKey !== screenshotShortcut.altKey ||
-        event.ctrlKey ||
-        event.metaKey
-      ) {
-        return;
-      }
-
-      const tagName = event.target.tagName;
-      if (tagName === 'INPUT' || tagName === 'TEXTAREA' || event.target.isContentEditable) {
-        return;
-      }
-
+      if (event.key.toUpperCase() !== 'D' || !event.shiftKey || !event.altKey || event.ctrlKey || event.metaKey) return;
+      const tag = event.target.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || event.target.isContentEditable) return;
       event.preventDefault();
       setScreenshotMode(!document.body.classList.contains('screenshot-mode'));
     });
 
-    syncExpandAllButton();
+    syncExpandAll();
 
+    // Price bar animation (bar only — headline stays at $8k)
+    (function () {
+      const bar = document.getElementById('price-bar');
+      if (!bar) return;
+      let animated = false;
+
+      function animateBar() {
+        if (animated) return;
+        animated = true;
+        requestAnimationFrame(() => { bar.style.width = '100%'; });
+      }
+
+      const numStat = bar.closest('.number-stat');
+      const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) animateBar();
+      }, { threshold: 0.4 });
+      if (numStat) observer.observe(numStat);
+    })();
   </script>
 </body>
 </html>
-
-
