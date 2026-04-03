@@ -828,10 +828,11 @@
       margin-bottom: 4rem;
     }
     .status-item {
-      padding: 0 2rem 0 0;
+      padding: 0 2rem;
       border-right: 1px solid rgba(255,255,255,0.1);
     }
-    .status-item:last-child { border-right: none; }
+    .status-item:first-child { padding-left: 0; }
+    .status-item:last-child { border-right: none; padding-right: 0; }
     .status-dot {
       width: 11px; height: 11px;
       border-radius: 50%;
@@ -1024,7 +1025,7 @@
       .ops-stat:nth-last-child(-n+1) { border-bottom: none; }
       .maintenance-grid { grid-template-columns: 1fr; }
       .status-timeline { grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
-      .status-item { border-right: none; padding-right: 0; }
+      .status-item { border-right: none; padding: 0; }
       .pilot-full-inner { grid-template-columns: 1fr; gap: 1.5rem; }
       .scroll-cue { display: none; }
       .floating-action { right: 0.8rem; bottom: 0.8rem; }
@@ -1488,7 +1489,7 @@
               <p>Our Letter of Intent is non-binding. It expresses mutual interest in moving forward and opens a direct conversation about delivery timing, quantity, and program fit. Either party can withdraw at any time before a final agreement is signed — no penalties, no obligations. If RAINIER fits your program, this is the lowest-friction way to stay at the front of the line.</p>
             </div>
             <div class="pilot-ctas">
-              <a href="#" class="pilot-btn pilot-btn-primary">Download the LOI</a>
+              <a href="#" class="pilot-btn pilot-btn-primary">Download the 1-Pager</a>
               <a href="mailto:info@koineadaptive.com" class="pilot-btn pilot-btn-secondary">Get in Touch</a>
             </div>
           </div>
